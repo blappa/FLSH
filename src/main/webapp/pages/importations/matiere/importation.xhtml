@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="form" >
+               <div style="font: normal 130%;color: white; background-color: #0184ff;"><h5>>>>> Gestion des importations >>  Matières et unités d'enseignement par specialité</h5></div>
+                <h:panelGrid columns="6" cellpadding="5" > 
+
+
+                    <p:outputLabel value="Departement:" for="departement" />
+                    <p:selectOneMenu id="departement" value="#{importationMatiereBean.departementId}" valueChangeListener="#{importationMatiereBean.processDepartement}"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                        <f:selectItems  value="#{importationMatiereBean.departements}"
+                                        var="dep"
+                                        itemLabel="#{dep.nom}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="section,niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{importationMatiereBean.sectionId}" valueChangeListener="#{importationMatiereBean.processSection}"  style="width: 160px"  disabled="#{importationMatiereBean.sectionDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{importationMatiereBean.sections}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                        <p:ajax update="niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Niveau:" for="niveau" />
+                    <p:selectOneMenu id="niveau" value="#{importationMatiereBean.niveauId}" valueChangeListener="#{importationMatiereBean.processNiveau}"    style="width: 160px"  disabled="#{importationMatiereBean.niveauDisable}" >  
+                        <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                        <f:selectItems value="#{importationMatiereBean.niveaux}" /> 
+                        <p:ajax update="specialite" event="change" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Specialite:" for="specialite" />
+                    <p:selectOneMenu id="specialite" value="#{importationMatiereBean.specialiteId}"    style="width: 160px"   disabled="#{importationMatiereBean.specialiteDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                        <f:selectItems value="#{importationMatiereBean.specialites}" 
+                                       var="sp"
+                                       itemLabel="#{sp.nom}"
+                                       itemValue="#{sp.id}"
+                                       />  
+                        <p:ajax update="annee" event="change" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Annee Academique" for="annee" />
+                    <p:selectOneMenu id="annee" value="#{importationMatiereBean.anneeId}"   style="width: 160px" valueChangeListener="#{importationMatiereBean.processAnnee}"  >  
+                        <f:selectItem itemLabel="Choisir une annee" itemValue="" />  
+                        <f:selectItems  value="#{importationEtudiantBean.anneeAcademiques}"
+                                        var="dep"
+                                        itemLabel="#{dep.annee}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="upload" event="change"   />
+                    </p:selectOneMenu>  
+
+                </h:panelGrid>  
+
+                <p:panel visible="#{importationMatiereBean.uploadVisible}" id="upload"> 
+
+                    <h:panelGrid columns="8" cellpadding="5"  >  
+                        <p:growl id="growl" showDetail="true" sticky="true" />  
+                        <p:fileUpload id="file"  fileUploadListener="#{importationMatiereBean.handleFileUpload}"                         
+                                      mode="advanced"  
+                                      showButtons="false"
+                                      update="form:growl"
+                                      sizeLimit="10000000" 
+                                      label="Choisir le fichier excel"
+                                      allowTypes="/(\.|\/)(xls)$/" /> 
+
+                    </h:panelGrid>
+                </p:panel>
+                 <p:panel> 
+                     <p:commandButton id="sol" value="Generer la fiche exemple"   actionListener="#{importationMatiereBean.xlsMatiere}"  ajax="false" />
+                </p:panel> 
+          
+        </h:form> 
+
+    </ui:composition>
+</html>

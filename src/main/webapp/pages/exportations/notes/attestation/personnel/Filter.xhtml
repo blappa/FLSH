@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+        <br></br><br></br><br></br>
+        <h:form id="semestreForm">
+
+            <h:panelGroup id="display">
+                <h:panelGrid columns="8" cellpadding="5" >
+                    <p:outputLabel value="Matricule de l'etudiant" for="matricule" />
+                    <p:inputText id="matricule" value="#{attestationBean.matricule}" >
+                        <p:ajax update="section" event="change" />
+                    </p:inputText>
+                    <p:outputLabel for="niveau"  value="Niveau"/>
+                    <p:selectOneMenu id="niveau" value="#{attestationBean.niveauLevel}" style="width: 180px;" valueChangeListener="#{attestationBean.processNiveau1}"   >
+                        <f:selectItem itemLabel="Choisir" itemValue="" />  
+                        <f:selectItem itemLabel="Licence" itemValue="3"/>
+                        <f:selectItem itemLabel="Master" itemValue="5"/>
+                        <p:ajax update="section" event="change" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{attestationBean.sectionId}"   style="width: 160px"  disabled="#{attestationBean.sectionDisable}" required="=true"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{attestationBean.listSection1}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                    </p:selectOneMenu> 
+
+                </h:panelGrid>
+
+            </h:panelGroup>
+            <p:panel>
+                <p:commandButton  value="Exporter"  actionListener="#{attestationBean.PDF(0)}"  style="text-decoration : blue;" ajax="false"  /> 
+            </p:panel>
+        </h:form>
+
+    </ui:composition>
+
+</html>

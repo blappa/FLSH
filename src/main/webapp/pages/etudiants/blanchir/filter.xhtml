@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    <ui:composition>
+        <h:form id="form" >
+          <div style="font: normal 130%;color: white; background-color: #0184ff;"><h5>>>>> Gestion des etudiants >> Blanchir un etudiant</h5></div>
+            <p:panel style="padding-bottom: 31%;">  
+                <h:panelGrid columns="4" cellpadding="5" > 
+
+                    <p:outputLabel value="Matricule:" for="matricule" />
+                    <p:inputText id="matricule" value="#{importationNoteBean.matricule}" valueChangeListener="#{importationNoteBean.processMatricule}"   >  
+                         <p:ajax update="section" event="change" />
+                    </p:inputText>
+                    
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{importationNoteBean.sectionId}"   style="width: 160px"  disabled="#{importationNoteBean.sectionDisable}" required="=true"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{importationNoteBean.listSection}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                            <p:ajax update="annee" event="change" />
+                    </p:selectOneMenu> 
+                    
+                
+                    <p:outputLabel value="Annee Academique" for="annee" />
+                    <p:selectOneMenu id="annee" value="#{importationNoteBean.anneeId}"   style="width: 160px" valueChangeListener="#{importationNoteBean.processAnnee}"  >  
+                        <f:selectItem itemLabel="Choisir une annee" itemValue="" />  
+                        <f:selectItems  value="#{importationEtudiantBean.anneeAcademiques}"
+                                        var="dep"
+                                        itemLabel="#{dep.annee}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                   </p:selectOneMenu>  
+
+                       
+                </h:panelGrid> 
+                <p:commandButton  value="Blanchir"  actionListener="#{importationNoteBean.doBlanchir}"  update=":growl" ajax="false" style="margin-top: 1%"/>
+               </p:panel> 
+            
+           
+        </h:form> 
+
+    </ui:composition>
+</html>

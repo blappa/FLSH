@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+    <ui:composition>
+        <h:form>
+            <p:panel visible="#{loginController.test}">
+                <p:menubar >  
+                    <p:submenu icon="ui-icon-document-b" label="Notes | " style="margin-left: 10px;" >
+                        <p:menuitem value="par specialite" url="/a23" />
+                         <p:separator />
+                        <p:menuitem value="par matiere" url="/a25" />
+                         <p:separator />
+                        <p:menuitem value="incomplete par specialite" url="/pages/importations/notes/specialite1/index.xhtml" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-person" label="Etudiants | " style="margin-left: 10px;">
+                        <p:menuitem value="inscrits" url="/a26" />
+                         <p:separator />
+                        <p:menuitem value="supprimer d'une specialite" url="/a41" />
+                         <p:separator />
+                        <p:menuitem value="mettre à jour des donnees des etudiants" url="/a29" />   
+                         <p:separator />
+                        <p:menuitem value="preinscrits" url="/a30" />
+                         <p:separator />
+                        <p:menuitem value="regulariser" url="/pages/importations/etudiants/inscritSup/index.xhtml" />   
+                    </p:submenu>
+                    <p:menuitem icon="ui-icon-check"  value="solvables | " url="/a27" style="margin-left: 10px;"/>       
+                    <p:menuitem icon="ui-icon-document" value="matieres | " url="/a28" style="margin-left: 10px;" />       
+                </p:menubar>
+            </p:panel>
+
+
+            <p:panel visible="#{loginController.dep()}">
+                <p:menubar >  
+                   <p:submenu icon="ui-icon-document-b" label="Notes | " style="margin-left: 10px;" >
+                         <p:menuitem value="par specialite" url="/a23" />
+                          <p:separator />
+                        <p:menuitem value="par matiere" url="/a25" />
+                         <p:separator />
+                        <p:menuitem value="incomplete par specialite | " url="/pages/importations/notes/specialite1/index.xhtml" />
+                    </p:submenu>
+                </p:menubar>
+            </p:panel>
+
+        </h:form> 
+    </ui:composition>
+
+</html>

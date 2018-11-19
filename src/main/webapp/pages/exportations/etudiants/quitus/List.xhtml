@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition>
+       <p:dataTable var="etudiant" value="#{print.pvsemestre}"
+                         rowIndexVar="index"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="503"
+                         id="datatable"
+                        >
+            <p:columnGroup type="header"  >
+                    <p:row >
+                        <p:column rowspan="3" colspan="3" headerText="" />
+                        <c:forEach items="#{print.modules}" var="module">
+                            <p:column colspan="3"  headerText="#{module.intitule}" width="147" />
+                        </c:forEach>   
+                        <p:column  rowspan="4" headerText="moy." width="25" style="" />
+                        <p:column rowspan="4" headerText="credits" width="25" />
+                        <p:column rowspan="4" headerText="rang" width="25" />
+                    </p:row>
+                    <p:row>
+                        <c:forEach items="#{print.modules}" var="module">
+                            <p:column colspan="3" headerText="#{module.targetCode}" />
+                        </c:forEach>   
+                    </p:row>
+                    <p:row>
+                        <c:forEach items="#{print.modules}" var="module">
+                            <p:column colspan="3"  headerText="#{module.credit}" />
+                        </c:forEach>   
+                    </p:row>
+                    <p:row>
+                        <p:column  headerText="no" width="25" />
+                        <p:column  headerText="matricule" width="100" />
+                        <p:column  headerText="noms et prenoms" width="300" />
+                        <c:forEach items="#{print.modules}" var="module">
+                            <p:column  headerText="note/100" width="50"  />
+                            <p:column  headerText="grade" width="30" />
+                            <p:column  headerText="code" width="25" />
+                        </c:forEach>   
+
+                    </p:row>
+
+                </p:columnGroup>
+                <p:column width="25">
+                    <h:outputText value="#{index+1}" />
+                </p:column>
+                <p:column width="100">
+                    <h:outputText value="#{etudiant.matEtudiant}"  />
+                </p:column>
+                <p:column width="300">
+                    <h:outputText value="#{etudiant.nomEtudiant}" />
+                </p:column>
+                
+                <p:column width="50">
+                    <h:outputText value="#{etudiant.note1}" />
+                </p:column>
+                <p:column width="30"  >
+                    <h:outputText value="#{etudiant.grade1}" />
+                </p:column>
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.cote1}" />
+                </p:column>
+
+                <p:column width="50">
+                    <h:outputText value="#{etudiant.note2}" />
+                </p:column>
+                <p:column width="30"  >
+                    <h:outputText value="#{etudiant.grade2}" />
+                </p:column>
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.cote2}" />
+                </p:column>
+
+                <p:column width="50">
+                    <h:outputText value="#{etudiant.note3}" />
+                </p:column>
+                <p:column width="30"  >
+                    <h:outputText value="#{etudiant.grade3}" />
+                </p:column>
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.cote3}" />
+                </p:column>
+
+                <p:column width="50">
+                    <h:outputText value="#{etudiant.note4}" />
+                </p:column>
+                <p:column width="30"  >
+                    <h:outputText value="#{etudiant.grade4}" />
+                </p:column>
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.cote4}" />
+                </p:column>
+
+                <p:column width="50">
+                    <h:outputText value="#{etudiant.note5}" />
+                </p:column>
+                <p:column width="30"  >
+                    <h:outputText value="#{etudiant.grade5}" />
+                </p:column>
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.cote5}" />
+                </p:column>
+
+                <p:column width="50">
+                    <h:outputText value="#{etudiant.note6}" />
+                </p:column>
+                <p:column width="30"  >
+                    <h:outputText value="#{etudiant.grade6}" />
+                </p:column>
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.cote6}" />
+                </p:column>
+
+
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.moy}" />
+                </p:column >
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.cap}" />
+                </p:column>
+                <p:column width="25">
+                    <h:outputText value="#{etudiant.rang}" />
+                </p:column>
+
+                <p:columnGroup type="footer">
+                    <p:row>
+                        <p:column colspan="2" rowspan="2" footerText="" width="144"/>
+                        <p:column   footerText="Nbre d'Etudiants ayant Validés" width="300" />
+                        <p:column  footerText="#{etudiant.nmEtuVal1}" width="147" />
+                        <p:column  footerText="#{etudiant.nmEtuVal2}" width="147" />
+                        <p:column  footerText="#{etudiant.nmEtuVal3}" width="147" />
+                        <p:column  footerText="#{etudiant.nmEtuVal4}" width="147" />
+                        <p:column  footerText="#{etudiant.nmEtuVal5}" width="147" />
+                        <p:column  footerText="#{etudiant.nmEtuVal6}" width="147" />
+                        <p:column colspan="2" rowspan="2" footerText="" width="144"/>
+                    </p:row>
+                    <p:row>
+                        <p:column width="300" footerText="Pourcentage de Validation (/#{print.pvsemestre.size()})" />
+                        <p:column  footerText="#{etudiant.percentVal1}" width="147" />
+                        <p:column  footerText="#{etudiant.percentVal2}" width="147" />
+                        <p:column  footerText="#{etudiant.percentVal3}" width="147" />
+                        <p:column  footerText="#{etudiant.percentVal4}" width="147" />
+                        <p:column  footerText="#{etudiant.percentVal5}" width="147" />
+                        <p:column  footerText="#{etudiant.percentVal6}" width="147" />
+                 </p:row>
+                </p:columnGroup>
+           </p:dataTable>
+   </ui:composition>
+</html>

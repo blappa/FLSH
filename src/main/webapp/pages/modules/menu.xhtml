@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+    <ui:composition>
+        <h:form >
+            <p:menubar >  
+                <p:menuitem icon="ui-icon-home"  value="#{myBundle.Menu_Departement} | " url="/a35" style="margin-left: 10px;"  />
+                <p:menuitem icon="ui-icon-flag" value="#{myBundle.Menu_Section} | " url="/a36" style="margin-left: 10px;" />
+                <p:menuitem icon="ui-icon-bookmark"  value="#{myBundle.Menu_Niveau} | " url="/a37" style="margin-left: 10px;"  />
+                <p:menuitem icon="ui-icon-home" value="Specialite | " url="/a38" style="margin-left: 10px;"  />                    
+                <p:menuitem icon="ui-icon-script" value="Matiere | " url="/a32" style="margin-left: 10px;"/>
+                <p:menuitem icon="ui-icon-document" value="UE | " url="/a34" style="margin-left: 10px;"/>                 
+                <p:menuitem icon="ui-icon-radio-on"  value="Semestre | " url="/a43" style="margin-left: 10px;"  /> 
+                <p:submenu  icon="ui-icon-notice" label="#{myBundle.Menu_AnneeAcademique} | " style="margin-left: 10px;"  >
+                    <p:menuitem  value="Liste" url="/a42" />
+                    <p:separator />
+                    <p:menuitem value="Gestion des annees" url="/pages/modules/anneeAcademique/choosen/index.xhtml" />  
+                    <p:separator />
+                    <p:menuitem value="Annee courante" url="/pages/modules/anneeAcademique/target/index.xhtml" />    
+                </p:submenu>
+                <p:menuitem icon="ui-icon-person"  value="Utilisateur" url="/a44" style="margin-left: 10px;"/> 
+            </p:menubar>
+        </h:form> 
+    </ui:composition>
+
+</html>

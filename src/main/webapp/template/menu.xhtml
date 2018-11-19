@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </h:head> 
+    <body>
+        <ui:composition>
+            <h:form id="menuForm">
+                <p:panel visible="#{loginController.doyen()}">
+                    <p:toolbarGroup >
+                        <p:menubar   >  
+                            <p:menuitem value="#{myBundle.Menu_Home}" outcome="/pages/welcome" icon="ui-icon-home" style="margin-top: 0%;"/>
+                            <p:separator />
+                            <p:menuitem value="Notes"  icon="ui-icon-document-b" url="/a3"  style="color: white; margin-top: 0%;" />
+                            <p:separator />
+                            <p:menuitem value="Etudiants"  icon="ui-icon-person" url="/a1"  style="color: white; margin-top: 0%;" />
+                            <p:separator />
+                            <p:menuitem value="Importations"  icon="ui-icon-circle-triangle-n" url="/a4"  style="color: white; margin-top: 0%;" />
+                            <p:separator />
+                            <p:menuitem value="Exportations"  icon="ui-icon-transferthick-e-w" url="/a5"  style="color: white; margin-top: 0%;" />
+                            <p:separator />
+                            <p:menuitem value="Modules"  icon="ui-icon-gear" url="/a7"  style="color: white; margin-top: 0%;" /> 
+                            <p:separator />
+                            <p:menuitem value="Statistiques"  icon="ui-icon-image" url="/a54"  style="color: white; margin-top: 0%;" />                           
+                            <p:separator />
+                            <p:menuitem value="Sms"  icon="ui-icon-mail-closed" url="/a68"  style="color: white; margin-top: 0%;" />                                                    
+                            <p:separator />
+                            <p:menuitem icon="ui-icon-bookmark" value="Historique" url="/a66" style="color: white; margin-top: 0%;" />
+                        </p:menubar>
+                        <p:panel style="margin-top: 0%;">
+                            <p:menubar > 
+                                <p:menuitem icon="ui-icon-help " value="Aide" url="/a8"/>
+                            </p:menubar>
+                        </p:panel>
+                    </p:toolbarGroup>
+                </p:panel>
+                <p:panel visible="#{loginController.infor()}">
+                    <p:toolbarGroup>
+                        <p:menubar >  
+                            <p:menuitem value="#{myBundle.Menu_Home}" outcome="/pages/welcome" icon="ui-icon-home" style="margin-top: 4%;"/>
+                            <p:separator />
+                            <p:menuitem value="Notes"  icon="ui-icon-document-b" url="/a3"  style="color: white; margin-top: 4%;" />
+                            <p:separator />
+                            <p:menuitem value="Etudiants"  icon="ui-icon-person" url="/a1"  style="color: white; margin-top: 4%;" />
+                            <p:separator />
+                            <p:menuitem value="Importations"  icon="ui-icon-circle-triangle-n" url="/a4"  style="color: white; margin-top: 4%;" />
+                            <p:separator />
+                            <p:menuitem value="Exportations"  icon="ui-icon-extlink" url="/a5"  style="color: white; margin-top: 4%;" />
+                            <p:separator />
+                            <p:menuitem value="Modules"  icon="ui-icon-gear" url="/a7"  style="color: white; margin-top: 4%;" /> 
+                            <p:separator />
+                            <p:menuitem value="Sms"  icon="ui-icon-mail-closed" url="/a68"  style="color: white; margin-top: 0%;" />                                                    
+                            <p:separator />
+                            <p:menuitem value="Statistiques"  icon="ui-icon-image" url="/a54"  style="color: white; margin-top: 4%;" />               
+                        </p:menubar>
+                        <p:panel style="margin-top: 0%;">
+                            <p:menubar > 
+                                <p:menuitem icon="ui-icon-help " value="Aide" url="/a8"/>
+                            </p:menubar>
+                        </p:panel>
+                    </p:toolbarGroup>
+                </p:panel>
+                <p:panel visible="#{loginController.stat()}">
+                    <p:toolbarGroup>
+                        <p:menubar >  
+                            <p:menuitem value="#{myBundle.Menu_Home}" outcome="/pages/welcome" icon="ui-icon-home" style="margin-top: 10%;"/>
+                            <p:separator /> <p:menuitem icon="ui-icon-document-b" value="Notes" url="/a3" style="margin-top: 10%;"  />  
+                            <p:menuitem value="Etudiants"  icon="ui-icon-person" url="/a1"  style="color: white; margin-top: 10%;"  />
+                            <p:separator />
+                            <p:menuitem value="Statistiques"  icon="ui-icon-image" url="/a54"  style="color: white; margin-top: 10%;margin-bottom: 50%;" /> 
+                        </p:menubar>
+                        <p:panel style="margin-top: 10%;">
+                            <p:menubar > 
+                                <p:menuitem icon="ui-icon-help " value="Aide" url="/a8"/>
+                            </p:menubar>
+                        </p:panel>
+                    </p:toolbarGroup>
+                </p:panel>
+                <p:panel visible="#{loginController.dep()}">
+                    <p:toolbarGroup>
+                        <p:menubar >  
+                            <p:menuitem value="#{myBundle.Menu_Home}" outcome="/pages/welcome" icon="ui-icon-home" style="margin-top: 10%;"/>
+                             <p:separator />
+                             <p:menuitem value="Notes"  icon="ui-icon-document-b" url="/a3"  style="color: white; margin-top:10%;" />
+                             <p:separator />
+                             <p:menuitem value="Etudiants"  icon="ui-icon-person" url="/a1"  style="color: white; margin-top: 10%;"  />
+                             <p:separator />
+                             <p:menuitem value="Importations"  icon="ui-icon-circle-triangle-n" url="/a4"  style="color: white; margin-top: 10%;"  />
+                        </p:menubar>
+                        <p:panel style="margin-top: 10%;">
+                            <p:menubar > 
+                                <p:menuitem icon="ui-icon-help " value="Aide" url="/a8"/>
+                            </p:menubar>
+                        </p:panel>
+                    </p:toolbarGroup>
+                </p:panel>
+            </h:form>
+        </ui:composition>
+    </body>
+</html>

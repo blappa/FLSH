@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:composition>
+
+        <p:dialog id="InscriptionViewDlg" widgetVar="InscriptionViewDialog" modal="true" resizable="false" appendToBody="true" header="Modules >> Configuration >> #{myBundle.ViewInscriptionTitle}">
+
+            <h:form id="InscriptionViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inscriptionBean.selected != null}">
+
+                        <h:outputText value="Type"/>
+                        <h:outputText value="#{inscriptionBean.selected.type}"/>
+
+                        <h:outputText value="Etudiant"/>
+                        <h:outputText value="#{inscriptionBean.selected.etudiant.nom}"/>
+
+                        <h:outputText value="Section"/>
+                        <h:outputText value="#{inscriptionBean.selected.section.nom}" />
+
+                        <h:outputText value="Annee Ac."/>
+                        <h:outputText value="#{inscriptionBean.selected.anneeAcademique.annee}" />
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="InscriptionViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

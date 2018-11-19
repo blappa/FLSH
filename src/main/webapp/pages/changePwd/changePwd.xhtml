@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/aze.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Changer le Mot de Passe"/>
+        </ui:define>
+        <ui:define name="content">
+            
+            <p:panel header=">>>>> Modifier le mot de passe" >
+                <br></br><br></br>
+                <h:form >
+                    <table>
+                        <tr><td><p:outputLabel for="pwd0"  value="Ancien mot de passe"/></td>
+                            <td>
+                                <p:password feedback="true" match="pwd0" id="pwd0" value="#{authentification.username_n}"/>
+                            </td>
+                        </tr>
+                        <tr><td><p:outputLabel for="pwd"  value="Nouveau mot de passe"/></td>
+                            <td>
+                                <p:password feedback="true" match="pwd2" id="pwd" value="#{authentification.pwd}"/>
+                            </td>
+                        </tr>
+                        <tr><td><p:outputLabel for="pwd2"  value="Confirmer"/></td>
+                            <td>
+                                <p:password id="pwd2" required="true" feedback="true" value="#{authentification.pwd}"/>
+                                <p:tooltip for="pwd2" value="Erreur mot de passe" showEvent="focus" />
+                            </td>
+                        </tr>
+                        <tr><td><p:commandButton value="Enregistrer" actionListener="#{authentification.changeLogin}" update=":growl"/></td>
+                        </tr>
+                    </table> 
+                     <input type="hidden" name="${_csrf.parameterName}"
+                           value="${_csrf.token}" />
+                    
+                </h:form>  
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
+
+

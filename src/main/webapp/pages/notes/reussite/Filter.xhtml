@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+        <div style="font: normal small-caps 120% fantasy;color: white; background-color: #0184ff;"><h5>>>>> Gestion des notes >> Proces verbal</h5></div>
+        <h:form id="semestreForm">
+
+            <h:panelGroup id="display">
+                <h:panelGrid columns="6" cellpadding="5" >
+                    
+                     <p:outputLabel for="niveau"  value="Niveau"/>
+                    <p:selectOneMenu id="niveau" value="#{reussiteBean.niveauLevel}" style="width: 160px;" required="true"   >
+                        <f:selectItem itemLabel="Choisir" itemValue="" />  
+                        <f:selectItem itemLabel="Licence" itemValue="3"/>
+                        <f:selectItem itemLabel="Master" itemValue="5"/>
+                          <p:ajax update="anneeAcademiqueid,specialite" event="change" />
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                    <p:selectOneMenu id="anneeAcademiqueid" value="#{reussiteBean.anneeAcademiqueid}" required="true" style="width: 160px;" >
+                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{reussiteBean.listAnneeAcademique}"
+                                       var="anneeAcademiqueidItem"
+                                       itemValue="#{anneeAcademiqueidItem.id}"
+                                       itemLabel="#{anneeAcademiqueidItem.annee}"
+                                       />
+                        <p:ajax update="departement"  />
+
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel value="Departement:" for="departement" />
+                    <p:selectOneMenu id="departement" value="#{reussiteBean.departementId}" valueChangeListener="#{reussiteBean.processDepartement}"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                        <f:selectItems  value="#{reussiteBean.listDepartement}"
+                                        var="dep"
+                                        itemLabel="#{dep.nom}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="section,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{reussiteBean.sectionId}" valueChangeListener="#{reussiteBean.processSection}"  required="true" style="width: 160px"  disabled="#{reussiteBean.sectionDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{reussiteBean.listSection}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                        <p:ajax update="specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Specialite:" for="specialite" />
+                    <p:selectOneMenu id="specialite" value="#{reussiteBean.specialiteId}"   style="width: 160px"  disabled="#{reussiteBean.specialiteDisable}"     >  
+                        <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                        <f:selectItems value="#{reussiteBean.listSpecialite}" 
+                                       var="sp"
+                                       itemLabel="#{sp.nom}"
+                                       itemValue="#{sp.id}"
+                                       />  
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Type de proves" for="type" />
+                    <p:selectOneMenu id="type" value="#{reussiteBean.typeReussite}" required="true" style="width: 160px"  >
+                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                        <f:selectItem itemValue="N" itemLabel="Normale"/>
+                        <f:selectItem itemValue="R" itemLabel="Ratrappage"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </h:panelGroup>
+            <p:commandButton  value="Exporter"  actionListener="#{reussiteBean.PDF()}"  style="text-decoration : blue;" ajax="false"  />
+        </h:form>
+    </ui:composition>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="form" >
+            <p:panel header="souscription des étudiants aux sms" style="padding-bottom: 28%;">  
+
+                <h:panelGrid columns="8" cellpadding="5" > 
+                    
+                     <p:outputLabel value="Section" for="sect" />
+                        <p:selectOneMenu id="sect" value="#{smsBean.sectionId}" required='true'   style="width: 160px"  >  
+                            <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                            <f:selectItems  value="#{smsBean.listSection}"
+                                            var="dep"
+                                            itemLabel="#{dep.nom}"
+                                            itemValue="#{dep.id}"
+                                            />  
+                            <p:ajax update="@this" event="change" />
+                        </p:selectOneMenu>
+
+                    <p:outputLabel value="Semestre:" for="type" />
+                    <p:selectOneMenu id="type" value="#{smsBean.typeSemestre}" required="=true"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="choisir l'operation" itemValue="" />
+                        <f:selectItem itemLabel="notes du semestre 1" itemValue="1" />
+                        <f:selectItem itemLabel="notes du semestre 2" itemValue="2" />
+                         <p:ajax update="@this" event="change" />
+                    </p:selectOneMenu> 
+
+                    <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                    <p:selectOneMenu id="anneeAcademiqueid" value="#{smsBean.anneeAcademiqueid}" required="true" style="width: 160px"  >
+                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{smsBean.listAnneeAcademique}"
+                                       var="anneeAcademiqueidItem"
+                                       itemValue="#{anneeAcademiqueidItem.id}"
+                                       itemLabel="#{anneeAcademiqueidItem.annee}"
+                                       />
+                        <p:ajax update="@this" event="change" />
+                    </p:selectOneMenu>
+
+
+                </h:panelGrid>  
+                <p:panel  id="upload"> 
+
+                    <h:panelGrid columns="8" cellpadding="5"  >  
+                        <p:growl id="growl" showDetail="true" sticky="true" escape="false" />  
+                        <p:fileUpload id="file"  fileUploadListener="#{smsBean.handleFileUpload}"                         
+                                      mode="advanced"  
+                                      showButtons="false"
+                                      update="form:growl"
+                                      sizeLimit="10000000" 
+                                      label="Choisir le fichier excel"
+                                      allowTypes="/(\.|\/)(xls)$/" /> 
+                    </h:panelGrid>
+                </p:panel> 
+                <p:panel> 
+                    <p:commandButton id="sol" value="Generer la fiche exemple"   actionListener="#{smsBean.xls}"  ajax="false" />
+                </p:panel> 
+
+            </p:panel> 
+        </h:form> 
+
+    </ui:composition>
+</html>

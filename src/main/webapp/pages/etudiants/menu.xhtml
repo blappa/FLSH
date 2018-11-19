@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+    <ui:composition>
+        <h:form>
+            <p:panel visible="#{loginController.test}">
+                <p:menubar >  
+                    <p:menuitem icon="ui-icon-document" value="Liste des étudiants | " url="/a9" style="margin-left: 10px;" />
+                    <p:menuitem icon="ui-icon-circle-zoomin"  value="Profil étudiant | "  url="/a10" style="margin-left: 10px;" />  
+                    <p:menuitem icon="ui-icon-radio-on" value="Blanchir un étudiant" url="/a11" /> 
+                </p:menubar>
+            </p:panel>
+
+            <p:panel visible="#{loginController.stat()}">
+                <p:menubar > 
+                    <p:menuitem icon="ui-icon-document" value="Liste des étudiants | " url="/a9" style="margin-left: 10px;"  />
+                    <p:menuitem icon="ui-icon-circle-zoomin"  value="Profil étudiant"  url="/a10"  style="margin-left: 10px;"/>  
+                </p:menubar>
+            </p:panel>
+
+            <p:panel visible="#{loginController.dep()}">
+                <p:menubar >  
+                    <p:menuitem icon="ui-icon-document" value="Liste des étudiants | " url="/a9" style="margin-left: 10px;"/>
+                    <p:menuitem icon="ui-icon-circle-zoomin"  value="Profil étudiant"  url="/a10"  style="margin-left: 10px;"/>  
+                </p:menubar>
+            </p:panel>
+        </h:form> 
+    </ui:composition>
+
+</html>

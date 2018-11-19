@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <div style="font: normal 130%;color: white; background-color: #0184ff;"><h5>>>>> Gestion des notes >> valider les passages</h5></div>
+                <h:panelGrid columns="8" cellpadding="5" > 
+                    
+                      <p:outputLabel value="Departement:" for="departement" />
+                <p:selectOneMenu id="departement" value="#{print.departementId}"   style="width: 160px"  >  
+                    <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                    <f:selectItems  value="#{print.listDepartement}"
+                                    var="dep"
+                                    itemLabel="#{dep.nom}"
+                                    itemValue="#{dep.id}"
+                                    />  
+                </p:selectOneMenu>  
+
+
+                    <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                    <p:selectOneMenu id="anneeAcademiqueid" value="#{print.anneeAcademiqueid}" required="true" style="width: 160px"  >
+                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{print.listAnneeAcademique}"
+                                       var="anneeAcademiqueidItem"
+                                       itemValue="#{anneeAcademiqueidItem.id}"
+                                       itemLabel="#{anneeAcademiqueidItem.annee}"
+                                       />
+                    </p:selectOneMenu>
+                </h:panelGrid> 
+                <p:commandButton  value="Valider les passages"  actionListener="#{print.doPassage}"  update=":growl" ajax="false" style="margin-top: 1%"/>
+            
+    </ui:composition>
+</html>

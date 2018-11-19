@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SpecialiteEtudiantCreateDlg" widgetVar="SpecialiteEtudiantCreateDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Créer Specialite Etudiant">
+
+            <h:form id="SpecialiteEtudiantCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteEtudiantLabel_etudiantId}" for="etudiantId" />
+                        <p:selectOneMenu id="etudiantId" value="#{specialiteEtudiantBean.etudiantId}" required="true" requiredMessage="#{myBundle.EditSpecialiteEtudiantRequiredMessage_etudiantId}" style="width: 100%">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{specialiteEtudiantBean.listEtudiant}"
+                                           var="etudiantIdItem"
+                                           itemValue="#{etudiantIdItem.id}"
+                                           itemLabel="#{etudiantIdItem.nom}"
+                                           />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteEtudiantLabel_specialiteId}" for="specialiteId" />
+                        <p:selectOneMenu id="specialiteId" value="#{specialiteEtudiantBean.specialiteId}" required="true" requiredMessage="#{myBundle.EditSpecialiteEtudiantRequiredMessage_specialiteId}" style="width: 100%">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{specialiteEtudiantBean.listSpecialite}"
+                                           var="specialiteIdItem"
+                                           itemValue="#{specialiteIdItem.id}"
+                                           itemLabel="#{specialiteIdItem.code}"
+                                           />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Annee Academique" for="annneeId" />
+                        <p:selectOneMenu id="annneeId" value="#{specialiteEtudiantBean.anneeId}" required="true" requiredMessage="L'annee academique est obligatoire">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{specialiteEtudiantBean.listAnnees}"
+                                           var="specialiteEtudiantIdItem"
+                                           itemValue="#{specialiteEtudiantIdItem.id}"
+                                           itemLabel="#{specialiteEtudiantIdItem.annee}"
+                                           />
+                        </p:selectOneMenu>
+                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{specialiteEtudiantBean.saveNew}" value="#{myBundle.Save}" update="display,:parent:SpecialiteEtudiantListForm:datalist,:growl" oncomplete="SpecialiteEtudiantCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SpecialiteEtudiantCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

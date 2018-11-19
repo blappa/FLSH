@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="NoteBonusDlg" widgetVar="NoteBonusDialog" modal="true" resizable="false" appendToBody="true" header="Ajout du bonus">
+            <h:form id="NoteBonusForm" >
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" style="margin: 0 0 0 0;border: none;padding:  0 0 0 0;" >
+                        <p:outputLabel value="Session Dél." for="session" />
+                        <p:selectOneMenu id="session" value="#{noteBean.sessionDel}">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItem itemValue="SN" itemLabel="Session Normale"/>
+                            <f:selectItem itemValue="SR" itemLabel="Session Rattrapage"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Bonus Nor." for="norm" />
+                        <p:inputText id="norm" value="#{noteBean.noteDeliberationNorm}" />
+                        <p:outputLabel value="Bonus Rat." for="rat" />
+                        <p:inputText id="rat" value="#{noteBean.noteDeliberationRat}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{noteBean.doBonus}" value="Valider" update="display,:growl" oncomplete="NoteBonusDialog.hide()"  process = "display"  />
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="NoteBonusDialog.hide();"/>           
+                </h:panelGroup>
+            </h:form>        
+        </p:dialog>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="NoteListForm">
+        <p:panel visible="#{loginController.test}"> 
+            <p:commandButton    value="Délibérer" icon="ui-icon-plus" actionListener="#{noteBean.prepare}"  onclick="NoteDelibereDialog.show();"  disabled="#{empty noteBean.matiereId}" />
+            <p:spacer width="10" />
+            <p:commandButton    value="Ajouter bonus" icon="ui-icon-plus" actionListener="#{noteBean.prepare}"  onclick="NoteBonusDialog.show();"  disabled="#{empty noteBean.matiereId}" />
+            <p:spacer width="10" />
+            <p:commandButton    value="Ajouter une note" icon="ui-icon-plus" actionListener="#{noteBean.prepare}"  onclick="NoteCreateDialog.show();"  disabled="#{empty noteBean.matiereId}" />
+            <p:spacer width="10" />
+            <p:commandButton    value="Changer de formule" icon="ui-icon-plus" actionListener="#{noteBean.prepare}"  onclick="FormuleCreateDialog.show();"  disabled="#{empty noteBean.matiereId}" />
+            <p:spacer width="50" />
+            <p:selectOneMenu  value="#{noteBean.typeSup}">
+                <f:selectItem itemLabel="choisir l'operation a effectuer" itemValue="" />
+                <f:selectItem itemLabel="Tout" itemValue="all" />
+                <f:selectItem itemLabel="Notes de cc, tpe et td" itemValue="cc" />
+                <f:selectItem itemLabel="Les anonymats des examens" itemValue="exama" />
+                <f:selectItem itemLabel="Les notes d'examens" itemValue="examn" />
+                <f:selectItem itemLabel="Les anonymats des rattrapages" itemValue="rata" />
+                <f:selectItem itemLabel="Les notes de rattrapages" itemValue="ratn" />
+                <p:ajax update="executer" event="change" />
+            </p:selectOneMenu>
+            <p:spacer width="30" />
+            <p:commandButton id='executer'  value="Executer" onclick="del.show();"   disabled="#{empty noteBean.matiereId}" />
+
+        </p:panel>
+
+        <p:panel visible="#{loginController.dep()}"> 
+            <p:selectOneMenu  value="#{noteBean.typeSup}">
+                <f:selectItem itemLabel="choisir l'operation a effectuer" itemValue="" />
+                <f:selectItem itemLabel="Tout" itemValue="all" />
+                <f:selectItem itemLabel="Notes de cc, tpe et td" itemValue="cc" />
+                <f:selectItem itemLabel="Les anonymats des examens" itemValue="exama" />
+                <f:selectItem itemLabel="Les notes d'examens" itemValue="examn" />
+                <f:selectItem itemLabel="Les anonymats des rattrapages" itemValue="rata" />
+                <f:selectItem itemLabel="Les notes de rattrapages" itemValue="ratn" />
+                <p:ajax update="executer" event="change" />
+            </p:selectOneMenu>
+            <p:spacer width="30" />
+            <p:commandButton   value="Executer" onclick="del.show();"   disabled="#{empty noteBean.matiereId}" />
+
+        </p:panel>
+        <p:dataTable id="datalist" value="#{noteBean.listPvMatiere}" var="item"
+                     selection="#{noteBean.selectedNote}"
+                     rowKey="#{item.noteId}"
+                     scrollRows="1500" 
+                     scrollable="true" liveScroll="true" scrollHeight="513"
+                     rowIndexVar="index"
+                     selectionMode="single"
+                     >
+
+            <p:ajax event="contextMenu"  />
+
+            <p:column  headerText="N°" width="20">
+                <h:outputText value="#{index+1}"/>
+            </p:column>
+            <p:column headerText="Matricule"  width="70">
+                <h:outputText value="#{item.matricule}"/>
+            </p:column>
+            <p:column   width="180">
+                <f:facet name="header">
+                    <h:outputText value="Nom (s) et Prénom(s)"/>
+                </f:facet>
+                <h:outputText value="#{item.nomEtudiant}"/>
+            </p:column>
+            <p:column headerText="TPE"   width="30">
+
+                <h:outputText value="#{item.tpe}">
+                    <f:convertNumber pattern="#00.00" locale="pt_BR"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="TD"   width="30">
+                <h:outputText value="#{item.td}">
+                    <f:convertNumber pattern="#00.00" locale="pt_BR"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="CC"   width="30">
+                <h:outputText value="#{item.cc}">
+                    <f:convertNumber pattern="#00.00" locale="pt_BR"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="Ano. E."   width="30">
+                <h:outputText value="#{item.anoExam}"/>
+            </p:column>
+            <p:column   width="30">
+                <f:facet name="header">
+                    <h:outputText value="EE"/>
+                </f:facet>
+                <h:outputText value="#{item.ee}">
+                    <f:convertNumber pattern="#00.00" locale="pt_BR"/>
+                </h:outputText>
+            </p:column>
+            <p:column   width="30">
+                <f:facet name="header">
+                    <h:outputText value="Ano. R"/>
+                </f:facet>
+                <h:outputText value="#{item.anoRat}"/>
+            </p:column>
+            <p:column   width="30">
+                <f:facet name="header">
+                    <h:outputText value="RA"/>
+                </f:facet>
+                <h:outputText value="#{item.rat}">
+                    <f:convertNumber pattern="#00.00" locale="pt_BR"/>
+                </h:outputText>
+            </p:column>
+            <p:column   width="30">
+                <f:facet name="header">
+                    <h:outputText value="Moy"/>
+                </f:facet>
+                <h:outputText value="#{item.moy}">
+                    <f:convertNumber pattern="#00.00" locale="pt_BR"/>
+                </h:outputText>
+            </p:column>
+            <p:column   width="30">
+                <f:facet name="header">
+                    <h:outputText value="Coef"/>
+                </f:facet>
+                <h:outputText value="#{item.coef}"/>
+            </p:column>
+            <p:column   width="30">
+                <f:facet name="header">
+                    <h:outputText value="Grade"/>
+                </f:facet>
+                <h:outputText value="#{item.grade}"/>
+            </p:column>
+            <p:column   width="30">
+                <f:facet name="header">
+                    <h:outputText value="Decis."/>
+                </f:facet>
+                <h:outputText value="#{item.decision}"/>
+            </p:column> 
+
+        </p:dataTable>
+        <p:contextMenu for="datalist" id="contextmenu" rendered="#{loginController.test}"  >  
+            <p:menuitem value="Suppimer"  icon="ui-icon-trash" update=":parent:NoteListForm:confirm" oncomplete="sup.show()" />  
+            <p:menuitem value="Modifier"   icon="ui-icon-pencil" update=":parent:NoteEditForm:display"  oncomplete="NoteEditDialog.show()" ajax="true"    />  
+            <p:menuitem value="Faire valider"   icon="ui-icon-check" onclick="fer.show();" />
+            <p:menuitem value="Transférer"   icon="ui-icon-transferthick-e-w" update=":parent:NoteTransfertForm:display" oncomplete="NoteTransfertDialog.show()" ajax="true"  /> 
+        </p:contextMenu> 
+
+        <p:dialog id="confirm" header="Etez-vous sur de bien vouloir supprimer cet élèment ?" modal="true" resizable="true" appendToBody="true" widgetVar="sup">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="2" rendered="#{noteBean.selectedNote != null}">
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{noteBean.selectedNote.noteId}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{noteBean.doDelete}" update=":growl" oncomplete="sup.hide()" process = "display"/>
+                <p:commandButton value="Non" onclick="sup.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>
+
+        <p:dialog id="confirm1" header="Etez-vous sur de vouloir mettre la moyenne a 10 " widgetVar="fer" modal="true" resizable="true" appendToBody="true" >
+            <p:commandButton process = "@this"  value="Oui" actionListener="#{noteBean.doFermer}"  update=":growl" oncomplete="fer.hide()"  />
+            <p:commandButton value="Non" onclick="fer.hide();" type="button" />
+        </p:dialog>
+
+        <p:dialog id="confirm2" header="Etez-vous sur de vouloir vider les champs? " widgetVar="del" modal="true" resizable="true" appendToBody="true" >
+            <p:commandButton process = "@this"  value="Oui" actionListener="#{noteBean.doClear}"  update=":growl" oncomplete="del.hide()"  />
+            <p:commandButton value="Non" onclick="del.hide();" type="button" />
+        </p:dialog>
+
+
+    </h:form>
+</ui:composition>
+

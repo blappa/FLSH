@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="SmsListForm">
+
+        <p:dataTable id="datalist" value="#{smsBean.items}" var="item"
+                     selectionMode="single" selection="#{smsBean.selected}"
+                     rowKey="#{item.id}"
+                     scrollRows="1500" 
+                     scrollable="true" liveScroll="true" scrollHeight="460"
+                     rowIndexVar="index"
+                     >
+            <p:column width="50">
+                <f:facet name="header">
+                    <h:outputText value="No"/>
+                </f:facet>
+                <h:outputText value="#{index+1}"/>
+            </p:column>
+            <p:column sortBy="#{item.etudiant.matricule}" filterBy="#{item.etudiant.matricule}" width="75">
+                <f:facet name="header">
+                    <h:outputText value="Matricule"/>
+                </f:facet>
+                <h:outputText value="#{item.etudiant.matricule}"/>
+            </p:column>
+            <p:column sortBy="#{item.etudiant.nom}" filterBy="#{item.etudiant.nom}" width="200">
+                <f:facet name="header">
+                    <h:outputText value="Nom de l'étudiant"/>
+                </f:facet>
+                <h:outputText value="#{item.etudiant.nom}"/>
+            </p:column>
+            <p:column sortBy="#{item.section.nom}" filterBy="#{item.section.nom}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="Section"/>
+                </f:facet>
+                <h:outputText value="#{item.section.nom}"/>
+            </p:column>
+            <p:column sortBy="#{item.section.departement.nom}" filterBy="#{item.section.departement.nom}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="Département"/>
+                </f:facet>
+                <h:outputText value="#{item.section.departement.nom}"/>
+            </p:column>
+            <p:column sortBy="#{item.anneeAcademique.annee}" filterBy="#{item.anneeAcademique.annee}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="Annee de souscrip."/>
+                </f:facet>
+                <h:outputText value="#{item.anneeAcademique.annee}"/>
+            </p:column>
+            <p:column sortBy="#{item.etudiant.orange}" filterBy="#{item.etudiant.orange}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="No. orange"/>
+                </f:facet>
+                <h:outputText value="#{item.etudiant.orange}"/>
+            </p:column>
+            <p:column sortBy="#{item.etudiant.mtn}" filterBy="#{item.etudiant.mtn}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="No. mtn"/>
+                </f:facet>
+                <h:outputText value="#{item.etudiant.mtn}"/>
+            </p:column>
+            <p:column sortBy="#{item.etudiant.nextel}" filterBy="#{item.etudiant.nextel}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="No. nexttel"/>
+                </f:facet>
+                <h:outputText value="#{item.etudiant.nextel}"/>
+            </p:column>
+            <p:column sortBy="#{item.etudiant.internationnal}" filterBy="#{item.etudiant.internationnal}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="No. internationnal"/>
+                </f:facet>
+                <h:outputText value="#{item.etudiant.internationnal}"/>
+            </p:column>
+            <p:column sortBy="#{item.portee}" filterBy="#{item.portee}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="Type"/>
+                </f:facet>
+                <h:outputText value="#{item.portee}"/>
+            </p:column>
+            
+            
+            <f:facet name="footer">
+                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{etudiantBean.prepare}"  oncomplete="SmsCreateDialog.show()"/>
+              <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" update=":parent:SmsListForm:confirm" onclick="cd.show();" disabled="#{empty smsBean.selected}"/>
+            </f:facet>
+
+        </p:dataTable>
+
+        <p:dialog id="confirm" header="Etez-vous sur de bien vouloir supprimer cette élèment ?" modal="true" resizable="true" appendToBody="true" widgetVar="cd">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="1" rendered="#{smsBean.selected != null}">
+                    <h:outputText value="Sms : #{smsBean.selected.type}"/>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{smsBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{smsBean.delete}" update=":growl,datalist" oncomplete="cd.hide()" process = "display"/>
+                <p:commandButton value="Non" onclick="cd.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>
+    </h:form>
+
+</ui:composition>

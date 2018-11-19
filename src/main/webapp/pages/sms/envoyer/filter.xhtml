@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <div style="font: normal 130%;color: white; background-color: #0184ff;"><h5>>>>> Gestion des SMS >> envoir Sms</h5></div> 
+            <h:panelGrid columns="8" cellpadding="5" > 
+
+                <p:outputLabel value="Semestre:" for="type" />
+                <p:selectOneMenu id="type" value="#{smsBean.typeSemestre}"  style="width: 160px"  >  
+                    <f:selectItem itemLabel="choisir l'operation" itemValue="" />
+                    <f:selectItem itemLabel="notes session normale semestre 1" itemValue="1" />
+                    <f:selectItem itemLabel="notes ratrappage semestre 1" itemValue="2" />
+                    <f:selectItem itemLabel="notes session normale semestre 2" itemValue="3" />
+                    <f:selectItem itemLabel="notes ratrappage semestre 2" itemValue="4" />
+                    <f:selectItem itemLabel="synthèse semestre 1" itemValue="5" />
+                    <f:selectItem itemLabel="synthèse semestre 2" itemValue="6" />
+                    <f:selectItem itemLabel="synthèse annuelle " itemValue="7" />
+                </p:selectOneMenu> 
+
+                <p:outputLabel value="Departement:" for="departement" />
+                <p:selectOneMenu id="departement" value="#{smsBean.departementId}"   style="width: 160px"  >  
+                    <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                    <f:selectItems  value="#{smsBean.listDepartement}"
+                                    var="dep"
+                                    itemLabel="#{dep.nom}"
+                                    itemValue="#{dep.id}"
+                                    />  
+                </p:selectOneMenu>  
+
+
+                <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                <p:selectOneMenu id="anneeAcademiqueid" value="#{smsBean.anneeAcademiqueid}" required="true" style="width: 160px"  >
+                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                    <f:selectItems value="#{smsBean.listAnneeAcademique}"
+                                   var="anneeAcademiqueidItem"
+                                   itemValue="#{anneeAcademiqueidItem.id}"
+                                   itemLabel="#{anneeAcademiqueidItem.annee}"
+                                   />
+                </p:selectOneMenu>
+            </h:panelGrid> 
+        <p:commandButton  value="Envoyer des Sms"   actionListener="#{smsBean.doSend}"  update=":growl" ajax="false" style="margin-top: 1%"/>
+        
+    </ui:composition>
+</html>

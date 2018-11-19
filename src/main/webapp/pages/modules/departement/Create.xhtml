@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartementCreateDlg" widgetVar="DepartementCreateDialog" modal="true" resizable="false" appendToBody="true" header="Modules >> Créer Departement">
+
+            <h:form id="DepartementCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="#{myBundle.CreateDepartementLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{departementBean.selected.nom}" title="#{myBundle.CreateDepartementTitle_nom}" required="true" requiredMessage="Le nom du departement est obligatoire" style="width: 600px"/>
+
+                        <p:outputLabel value="#{myBundle.CreateDepartementLabel_sigle}" for="sigle" />
+                        <p:inputText id="sigle" value="#{departementBean.selected.sigle}" title="#{myBundle.CreateDepartementTitle_sigle}" required="true" requiredMessage="Le sigle du departement est obligatoire"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{departementBean.saveNew}" value="#{myBundle.Save}" update="display,:parent:DepartementListForm:datalist,:growl" oncomplete="DepartementCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="DepartementCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

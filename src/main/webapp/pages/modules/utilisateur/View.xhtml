@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UtilisateurViewDlg" widgetVar="UtilisateurViewDialog" modal="true" resizable="false" appendToBody="true" header="Modules >> Configuration >> #{myBundle.ViewUtilisateurTitle}">
+
+            <h:form id="UtilisateurViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{utilisateurBean.selected != null}">
+
+                        <h:outputText value="Nom"/>
+                        <h:outputText value="#{utilisateurBean.selected.name}"/>
+
+                        <h:outputText value="Autorisation"/>
+                        <h:outputText value="#{utilisateurBean.selected.autorisation.authority}"/>
+
+                        <h:outputText value="UserName"/>
+                        <h:outputText value="#{utilisateurBean.selected.username}" />
+
+                        <h:outputText value="PassWord"/>
+                        <h:outputText value="#{utilisateurBean.selected.password}" />
+
+                        <h:outputText value="Departement"/>
+                        <h:outputText value="#{utilisateurBean.selected.departement.nom}" />
+
+                        <h:outputText value="Etat"/>
+                        <h:outputText value="#{utilisateurBean.selected.enabled}"/>
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="UtilisateurViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

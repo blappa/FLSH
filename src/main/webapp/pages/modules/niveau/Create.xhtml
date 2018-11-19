@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NiveauCreateDlg" widgetVar="NiveauCreateDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Créer un Niveau">
+
+            <h:form id="NiveauCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Level" for="level" />
+                        <p:selectOneMenu id="level" value="#{niveauBean.selected.level}" style="width: 250px" >
+                            <f:selectItem itemValue="#" itemLabel="#{myBundle.choisir}" /> 
+                            <f:selectItem itemValue="1" itemLabel="Licence 1" /> 
+                            <f:selectItem itemValue="2" itemLabel="Licence 2" /> 
+                            <f:selectItem itemValue="3" itemLabel="Licence 3" /> 
+                            <f:selectItem itemValue="4" itemLabel="Master 1" />
+                            <f:selectItem itemValue="5" itemLabel="Master 2" />
+                        </p:selectOneMenu>   
+                        
+                        <p:outputLabel value="Departement" for="depId" />
+                        <p:selectOneMenu id="depId" value="#{niveauBean.depatementID}" required="true" requiredMessage="le departement est obligatoire" style="width: 250px">
+                            <f:selectItem itemLabel="#{myBundle.choisir}"/>
+                            <f:selectItems value="#{niveauBean.listeDepartement}"
+                                           var="sectionIdItem"
+                                           itemValue="#{sectionIdItem.id}"
+                                           itemLabel="#{sectionIdItem.nom}"
+                                           />
+  <!--                         <p:ajax update="sectionId" event="change" />-->
+                              <p:ajax update="sectionId"  listener="#{niveauBean.processSection}"/>
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel value="Section" for="sectionId" />
+                        <p:selectOneMenu id="sectionId" value="#{niveauBean.sectionId}" required="true" requiredMessage="valeur obligatoire" style="width: 250px" disabled="#{niveauBean.sectionDisable}">
+                            <f:selectItem itemLabel="#{myBundle.choisir}"/>
+                            <f:selectItems value="#{niveauBean.departSections}"
+                                           var="sectionIdItem"
+                                           itemValue="#{sectionIdItem.id}"
+                                           itemLabel="#{sectionIdItem.sigle}"
+                                           />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{niveauBean.saveNew}" value="#{myBundle.Save}" update="display,:parent:NiveauListForm:datalist,:growl" oncomplete="NiveauCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="NiveauCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

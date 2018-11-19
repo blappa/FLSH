@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="EtudiantListForm">
+        <div style="font: normal 130%;color: white; background-color: #0184ff;"><h5>>>>> Gestion des etudiants >> liste des etudiants</h5></div>
+        <p:dataTable id="datalist" value="#{etudiantBean.items}" var="item"
+                     selectionMode="single" selection="#{etudiantBean.selected}"
+                     rowKey="#{item.id}"
+                     scrollRows="1500" 
+                     scrollable="true" liveScroll="true" scrollHeight="460"
+                     rowIndexVar="index"
+                     >
+            <p:column width="50">
+                <f:facet name="header">
+                    <h:outputText value="No"/>
+                </f:facet>
+                <h:outputText value="#{index+1}"/>
+            </p:column>
+            <p:column sortBy="#{item.matricule}" filterBy="#{item.matricule}" width="75">
+                <f:facet name="header">
+                    <h:outputText value="#{myBundle.ListEtudiantTitle_matricule}"/>
+                </f:facet>
+                <h:outputText value="#{item.matricule}"/>
+            </p:column>
+            <p:column  sortBy="#{item.nom}" filterBy="#{item.nom}" width="200">
+                <f:facet name="header" >
+                    <h:outputText value="#{myBundle.ListEtudiantTitle_nom}"/>
+                </f:facet>
+                <h:outputText value="#{item.nom}"/>
+            </p:column>
+            <p:column sortBy="#{item.diplomEntree}" filterBy="#{item.diplomEntree}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="Diplome Entree"/>
+                </f:facet>
+                <h:outputText value="#{item.diplomEntree}"/>
+            </p:column>
+            
+            <p:column sortBy="#{item.lieuNais}" filterBy="#{item.lieuNais}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="Lieu Nais."/>
+                </f:facet>
+                <h:outputText value="#{item.lieuNais}"/>
+            </p:column>
+            <p:column sortBy="#{item.anneeObtDiplo}" filterBy="#{item.anneeObtDiplo}" width="100">
+                <f:facet name="header">
+                    <h:outputText value="Annee obt. diplo."/>
+                </f:facet>
+                <h:outputText value="#{item.anneeObtDiplo}"/>
+            </p:column>
+
+            <f:facet name="footer">
+                <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{etudiantBean.prepare}"  oncomplete="EtudiantCreateDialog.show()"/>
+                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":parent:EtudiantViewForm" oncomplete="EtudiantViewDialog.show()" disabled="#{empty etudiantBean.selected}"/>
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":parent:EtudiantEditForm:display" oncomplete="EtudiantEditDialog.show()" disabled="#{empty etudiantBean.selected}"/>
+                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" update=":parent:EtudiantListForm:confirm" oncomplete="cd.show()" disabled="#{empty etudiantBean.selected}"/>
+            </f:facet>
+
+        </p:dataTable>
+
+        <p:dialog id="confirm" header="Etez-vous sur de bien vouloir supprimer cette élèment ?" modal="true" resizable="true" appendToBody="true" widgetVar="cd">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="1" rendered="#{etudiantBean.selected != null}">
+                    <h:outputText value="Etudiant : #{etudiantBean.selected.nom}"/>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{etudiantBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{etudiantBean.delete}" update=":growl,datalist" oncomplete="cd.hide()" process = "display"/>
+                <p:commandButton value="Non" onclick="cd.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>
+    </h:form>
+
+</ui:composition>

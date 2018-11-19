@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="UtilisateurListForm">
+        <p:panel>
+
+            <p:dataTable id="datalist" value="#{utilisateurBean.items}" var="item"
+                         selectionMode="single" selection="#{utilisateurBean.selected}"
+                         rowKey="#{item.id}"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="460"
+                         rowIndexVar="index"
+                         >
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="No"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{item.name}" filterBy="#{item.name}" width="300">
+                    <f:facet name="header">
+                        <h:outputText value="Nom"/>
+                    </f:facet>
+                    <h:outputText value="#{item.name}"/>
+                </p:column>
+                <p:column sortBy="#{utilisateurBean.convertRole(item.autorisation.authority)}" filterBy="#{utilisateurBean.convertRole(item.autorisation.authority)}" width="150">
+                    <f:facet name="header">
+                        <h:outputText value="Niveau d'acces"/>
+                    </f:facet>
+                    <h:outputText value="#{utilisateurBean.convertRole(item.autorisation.authority)}"/>
+                </p:column>
+                <p:column sortBy="#{item.username}" filterBy="#{item.username}" width="120">
+                    <f:facet name="header">
+                        <h:outputText value="UserName"/>
+                    </f:facet>
+                    <h:outputText value="#{item.username}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.departement.nom}" filterBy="#{item.departement.nom}" width="200">
+                    <f:facet name="header">
+                        <h:outputText value="Departement"/>
+                    </f:facet>
+                    <h:outputText value="#{item.departement.nom}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.enabled}" filterBy="#{item.enabled}" width="70">
+                    <f:facet name="header">
+                        <h:outputText value="Etat"/>
+                    </f:facet>
+                    <h:outputText value="#{utilisateurBean.compte(item.enabled)}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{utilisateurBean.prepare}"  oncomplete="UtilisateurCreateDialog.show()"/>
+                    <p:commandButton id="activate" icon="ui-icon-trash"  value="Activer/Désactiver" update=":parent:UtilisateurListForm:activate" oncomplete="act.show();" disabled="#{empty utilisateurBean.selected}"/>
+                    <p:commandButton id="reset" icon="ui-icon-trash"  value="Réinitialiser" update=":parent:UtilisateurListForm:reset" oncomplete="res.show();" disabled="#{empty utilisateurBean.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" update=":parent:UtilisateurListForm:delete" oncomplete="del.show();" disabled="#{empty utilisateurBean.selected}"/>
+                </f:facet>
+            </p:dataTable>
+        </p:panel>       
+        <p:dialog id="delete" header="Etez-vous sur de bien vouloir supprimer cet utilisateur ?" modal="true" resizable="true" appendToBody="true" widgetVar="del">
+            <h:panelGroup id="display1">
+                <p:panelGrid  columns="1" rendered="#{utilisateurBean.selected != null}">
+                    <h:outputText  value="Utilisateur : #{utilisateurBean.selected.username}" />
+                    <p:panel visible="false">
+                        <p:inputText  value="#{utilisateurBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{utilisateurBean.delete}" update=":growl,datalist" oncomplete="del.hide()" process = "display1"/>
+                <p:commandButton value="Non" onclick="del.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>  
+
+
+        <p:dialog id="activate" header="Etez-vous sur de bien vouloir activer ou désactiver cet utilisateur ?" modal="true" resizable="true" appendToBody="true" widgetVar="act">
+            <h:panelGroup id="display2">
+                <p:panelGrid  columns="1" rendered="#{utilisateurBean.selected != null}">
+                    <h:outputText  value="Utilisateur : #{utilisateurBean.selected.username}" />
+                    <p:panel visible="false">
+                        <p:inputText  value="#{utilisateurBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{utilisateurBean.togleState}" update=":growl,datalist" oncomplete="act.hide()" process = "display2"/>
+                <p:commandButton value="Non" onclick="act.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>  
+
+
+        <p:dialog id="reset" header="Etez-vous sur de bien vouloir réinitialiser le mot de passe cet utilisateur ?" modal="true" resizable="true" appendToBody="true" widgetVar="res">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="1" rendered="#{utilisateurBean.selected != null}">
+                    <h:outputText  value="Utilisateur : #{utilisateurBean.selected.username}" />
+                    <p:panel visible="false">
+                        <p:inputText  value="#{utilisateurBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{utilisateurBean.resetPassword}" update=":growl,datalist" oncomplete="res.hide()" process = "display"/>
+                <p:commandButton value="Non" onclick="res.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>    
+
+    </h:form>
+</ui:composition>

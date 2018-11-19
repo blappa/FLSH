@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="FormuleCreateDlg" widgetVar="FormuleCreateDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.Menu_Note} >> #{myBundle.CreateNoteTitle}">
+            <h:form id="FormuleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" id="pannel" >
+                      
+                        <p:outputLabel value="TD/100" for="td" />
+                        <p:inputText id="td" value="#{noteBean.tdf}"  />
+
+                        
+                        <p:outputLabel value="TPE/100" for="tpe" />
+                        <p:inputText id="tpe" value="#{noteBean.tpef}"  />
+
+                        
+                        <p:outputLabel value="CC/100" for="cc" />
+                        <p:inputText id="cc" value="#{noteBean.ccf}"  />
+
+                        <p:outputLabel value="Examen/100" for="exam" />
+                        <p:inputText id="exam" value="#{noteBean.exf}"  />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{noteBean.doSetFormule}" value="#{myBundle.Save}" update="display,:growl" oncomplete="FormuleCreateDialog.hide()"  process = "display"   />
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="FormuleCreateDialog.hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>

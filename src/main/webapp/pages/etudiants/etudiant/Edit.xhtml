@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtudiantEditDlg" widgetVar="EtudiantEditDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.Menu_Etudiant} >> #{myBundle.EditEtudiantTitle}">
+
+            <h:form id="EtudiantEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="4" rendered="#{etudiantBean.selected != null}">
+
+                        <p:outputLabel value="#{myBundle.CreateEtudiantLabel_matricule}" for="matricule" />
+                        <p:inputText id="matricule" value="#{etudiantBean.selected.matricule}" title="#{myBundle.CreateEtudiantTitle_matricule}" />
+
+                        <p:outputLabel value="Noms et prenoms" for="nom" />
+                        <p:inputText id="nom" value="#{etudiantBean.selected.nom}" title="#{myBundle.CreateEtudiantTitle_nom}" />
+
+                        <p:outputLabel value="Diplome Entree" for="diplomEntree" />
+                        <p:inputText id="diplomEntree" value="#{etudiantBean.selected.diplomEntree}" title="diplome Entree" />
+
+                        
+                        <p:outputLabel value="Lieu Nais." for="lieuNais" />
+                        <p:inputText id="lieuNais" value="#{etudiantBean.selected.lieuNais}" title="lieu Naissance" />
+
+                        <p:outputLabel value="Sexe" for="sexe" />
+                        <p:inputText id="sexe" value="#{etudiantBean.selected.sexe}" title="sexe" />
+                        <p:outputLabel value="Région d'origine" for="region" />
+                        <p:inputText id="region" value="#{etudiantBean.selected.region}" title="region" />
+                        <p:outputLabel value="Departement d'origine" for="departement" />
+                        <p:inputText id="departement" value="#{etudiantBean.selected.departement}" title="departement" />
+                        <p:outputLabel value="Année d'obtention" for="anneeOb" />
+                        <p:inputText id="anneeOb" value="#{etudiantBean.selected.anneeObtDiplo}" title="année d'obtention" />
+                        <p:outputLabel value="Nationalité" for="nationalite" />
+                        <p:inputText id="nationalite" value="#{etudiantBean.selected.nationalite}" title="nationalite" />
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{etudiantBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{etudiantBean.update}" value="#{myBundle.Save}" update="display,:growl" oncomplete="EtudiantEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="EtudiantEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

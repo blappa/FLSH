@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <h:form id="NoteFilterForm">
+
+            <h:panelGroup id="display">
+                <h:panelGrid columns="2" cellpadding="5" > 
+                    <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                    <p:selectOneMenu id="anneeAcademiqueid" value="#{statistiquesRapportBean.anneeAcademiqueid}"  required="true" requiredMessage="selectionnez l'annee academique" style="width: 160px" >
+                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{statistiquesRapportBean.listAnneeAcademique}"
+                                       var="anneeAcademiqueidItem"
+                                       itemValue="#{anneeAcademiqueidItem.id}"
+                                       itemLabel="#{anneeAcademiqueidItem.annee}"
+                                       />
+                    </p:selectOneMenu>
+             <p:outputLabel value="Selectionner le niveau du raport d'amission" for="type"  />                  
+             <p:selectOneMenu id="type"  value="#{statistiquesRapportBean.typeImpression}"  required="true" >
+                        <f:selectItem itemLabel="type de rapport"/>    
+                        <f:selectItem itemValue="1" itemLabel="Niveau 1"/>
+                        <f:selectItem itemValue="2" itemLabel="Niveau 2"/>
+                        <f:selectItem itemValue="3" itemLabel="Niveau 3"/>
+                        <f:selectItem itemValue="4" itemLabel="Master 1"/>
+                        <f:selectItem itemValue="5" itemLabel="Master 2"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </h:panelGroup> 
+
+            <div style="margin-top: 2%;font-weight : bold;"> 
+                <p:commandButton icon="ui-icon-print" id="imprimer"  value="Generer"  actionListener="#{statistiquesRapportBean.xlsxRapport}"  ajax="false" />
+            </div>
+        </h:form>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:panel header="Annee >> Gestion des annees" style="padding-bottom: 31%;">  
+            <h:panelGrid columns="8" cellpadding="5" > 
+                <p:outputLabel value="Type:" for="type" />
+                <p:selectOneMenu id="type" value="#{anneeAcademiqueBean.typeOperation}"  style="width: 160px" required="true"  >  
+                    <f:selectItem itemLabel="choisir le le type" itemValue="" />
+                    <f:selectItem itemLabel="Toutes les annees" itemValue="1" />
+                    <f:selectItem itemLabel="Annee courante" itemValue="2" />
+                </p:selectOneMenu>  
+            </h:panelGrid> 
+            <p:commandButton  value="Valider"  actionListener="#{anneeAcademiqueBean.doSelect}"  update=":growl" ajax="false" style="margin-top: 1%"/>
+        </p:panel> 
+    </ui:composition>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModuleViewDlg" widgetVar="ModuleViewDialog" modal="true" resizable="false" appendToBody="true" header="Module >> View Un Module">
+
+            <h:form id="ModuleViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moduleBean.selected != null}">
+
+                        <h:outputText value="Code"/>
+                        <h:outputText value="#{moduleBean.selected.targetCode}" />
+
+                        <h:outputText value="Intitule"/>
+                        <h:outputText value="#{moduleBean.selected.intitule}" title="intitule"/>
+
+                        <h:outputText value="Credit"/>
+                        <h:outputText value="#{moduleBean.selected.credit}" title="credit"/>
+
+                        <h:outputText value="Specialite"/>
+                        <h:outputText value="#{moduleBean.selected.specialite.nom}" title="#{myBundle.ViewModuleTitle_specialite}"/>
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="ModuleViewDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

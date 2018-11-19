@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/aze.xhtml">
+    <ui:define name="title">
+        <h:outputText value="Diagrammes"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <ui:include src="../menu.xhtml"/>
+        <div id="center">
+            <h:form id="parent">
+                <p:tabView orientation="left" id='tab' activeIndex="0"  >
+                    <p:tab title="Repartition par sexe"  >
+                        <div id="left">
+                            <ui:include src="filter/filter1.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='sexe'>
+                                <p:pieChart  value="#{statistiquesBean.hommesFemmes}" legendPosition="w"  title="Etudiants inscrits par sexe" style="width:400px;height:450px"  showDataLabels="true" />  
+                            </h:form>
+                        </div>                              
+                    </p:tab> 
+
+
+                    <p:tab title="Répartition par specialite"  >
+                        <div id="left">
+                            <ui:include src="filter/filter2.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='specialitee'>
+                                <p:barChart  value="#{statistiquesBean.repartitionParSpecialite}" legendPosition="ne"  title="Répartion des étudiants par spécialité" min="0" max="#{statistiquesBean.max}" style="width:800px;height: 400px"  animate="true"/>                  
+                            </h:form>
+                        </div>                              
+                    </p:tab>  
+
+                    <p:tab title="Répartition par departement"  >
+                        <div id="left">
+                            <ui:include src="filter/filter3.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='departement'>
+                                <p:barChart id="basic2" value="#{statistiquesBean.repatitionParDepartement}" legendPosition="ne"  title="Répartion des étudiants par département" min="0" max="#{statistiquesBean.max}" style="width:800px;height: 400px"  animate="true" extender="extLegend" />  
+                            </h:form>
+                        </div>                              
+                    </p:tab>  
+
+                    <p:tab title="Repartition des licenciés par Sexe"  >
+                        <div id="left">
+                            <ui:include src="filter/filter4.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='licence'>
+                                <p:barChart id="basic3" value="#{statistiquesBean.repatitionParSexeLicenceSpevialite}" legendPosition="ne"  title="Repatition des licenciés par Sexe" min="0" max="#{statistiquesBean.max}" style="width:800px;height: 400px" animate="true" />  
+                            </h:form>
+                        </div>                              
+                    </p:tab>  
+
+                    <p:tab title="Etudiant ayant payé la première tranche"  >
+                        <div id="left">
+                            <ui:include src="filter/filter5.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='sem1'>
+                                <p:pieChart  value="#{statistiquesBean.regloPermierSem}" legendPosition="w"  title="Etudiant reglementaire au premier semestre" style="width:400px;height:450px"  showDataLabels="true" /> 
+                            </h:form>
+                        </div>                              
+                    </p:tab> 
+
+                    <p:tab title="Etudiant ayant payé la seconde tranche"  >
+                        <div id="left">
+                            <ui:include src="filter/filter6.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='sem2'>
+                                <p:pieChart  value="#{statistiquesBean.regloSecondSem}" legendPosition="w"  title="Etudiant reglementaire au second semestre" style="width:400px;height:450px"  showDataLabels="true" /> 
+                            </h:form>
+                        </div>                              
+                    </p:tab> 
+
+                    <p:tab title="Etudiant reglementaire en fin d annee"  >
+                        <div id="left">
+                            <ui:include src="filter/filter7.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='fin'>
+                                <p:pieChart  value="#{statistiquesBean.regloFinAnnee}" legendPosition="w"  title="Etudiant reglementaire en fin annee" style="width:400px;height:450px"  showDataLabels="true" /> 
+                            </h:form>
+                        </div>                              
+                    </p:tab> 
+
+
+                    <p:tab title="Repartition par type de diplome d'entrée"  >
+                        <div id="left">
+                            <ui:include src="filter/filter8.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='bac'>
+                                <p:barChart id="basic0" value="#{statistiquesBean.repartitionParBacDist}" legendPosition="ne"  
+                                            title="" min="0" max="#{statistiquesBean.max}" style="width:1000px;height: 400px" animate="true" xaxisAngle="-90"   />  
+                            </h:form>
+                        </div>                              
+                    </p:tab> 
+
+                    <p:tab title="Repartition par region d origine"  >
+                        <div id="left">
+                            <ui:include src="filter/filter9.xhtml"/>
+                        </div>
+                        <div  class="left_content">
+                            <h:form id='region'>
+                                <p:lineChart value="#{statistiquesBean.repartitionParRegionDep}" legendPosition="ne" zoom="true" animate="true"  
+                                             title="" minY="0" maxY="#{statistiquesBean.max}" style="width:1000px;height: 400px" widgetVar="chart" xaxisAngle="-90"  />
+                            </h:form>
+                        </div>                              
+                    </p:tab>
+                </p:tabView>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+

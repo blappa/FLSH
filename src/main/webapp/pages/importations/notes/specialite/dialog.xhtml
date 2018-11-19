@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+   
+      <h:form id="noteform">
+            <p:dataTable  id="notedatalist" value="#{importationNoteBean.rapports}" var="item"
+                         selection="#{importationNoteBean.selectedrRapport}"
+                         rowKey="#{item.no}"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="513"
+                         rowIndexVar="index"
+                         selectionMode="single"
+                         >
+
+                <p:column  headerText="N° " width="20">
+                    <h:outputText value="#{item.no}"/>
+                </p:column>
+                <p:column headerText="Appreciation"  width="80">
+                    <h:outputText value="#{item.appreciation}"/>
+                </p:column>
+                <p:column   width="800">
+                    <f:facet name="header">
+                        <h:outputText value="Message"/>
+                    </f:facet>
+                    <h:outputText value="#{item.message}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+</html>

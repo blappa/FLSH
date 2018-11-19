@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="form" >
+            <p:panel header="Annee courante" style="padding-bottom: 28%;">  
+                <h:panelGrid columns="8" cellpadding="5" > 
+                   <p:outputLabel value="Annee Academique" for="annee" />
+                   <p:selectOneMenu id="annee" value="#{anneeAcademiqueBean.anneId}"   style="width: 160px" required="true"  >  
+                        <f:selectItem itemLabel="Choisir une annee" itemValue="" />  
+                        <f:selectItems  value="#{anneeAcademiqueBean.items}"
+                                        var="ann"
+                                        itemLabel="#{ann.annee}"
+                                        itemValue="#{ann.id}"
+                                        />
+                    </p:selectOneMenu>  
+                </h:panelGrid>  
+                <p:panel> 
+                    <p:commandButton id="sol" value="Valider"   actionListener="#{anneeAcademiqueBean.doSetTarget}"  ajax="false" />
+                </p:panel> 
+            </p:panel> 
+        </h:form> 
+    </ui:composition>
+</html>

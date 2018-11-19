@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="SpecialiteListForm">
+
+        <p:panel header="Module >> Liste Specialite" id="contentspecialite">
+
+            <p:dataTable id="datalist" value="#{specialiteBean.items}" var="item"
+                         selectionMode="single" selection="#{specialiteBean.selected}"
+                         rowKey="#{item.id}"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="460"
+                         rowIndexVar="index"
+                         >
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="No"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{item.code}" filterBy="#{item.code}" width="200" >
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSpecialiteTitle_code}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.code}"/>
+                </p:column>
+                <p:column sortBy="#{item.nom}" filterBy="#{item.nom}" width="975">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSpecialiteTitle_nom}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nom}"/>
+                </p:column>
+                <p:column sortBy="#{item.niveau.level}" filterBy="#{item.niveau.level}" width="200">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSpecialiteTitle_niveauId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.niveau.level} #{item.niveau.section.departement.nom}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{specialiteBean.prepare}" oncomplete="SpecialiteCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":parent:SpecialiteViewForm" oncomplete="SpecialiteViewDialog.show()" disabled="#{empty specialiteBean.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":parent:SpecialiteEditForm:display" oncomplete="SpecialiteEditDialog.show()" disabled="#{empty specialiteBean.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" update=":parent:SpecialiteListForm:confirm" oncomplete="cd.show();"  disabled="#{empty specialiteBean.selected}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+        <p:dialog id="confirm" header="Etez-vous sur de bien vouloir supprimer cette élèment ?" modal="true" resizable="true" appendToBody="true" widgetVar="cd">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="1" rendered="#{specialiteBean.selected != null}">
+                    <h:outputText value="Specialité : #{specialiteBean.selected.nom}"/>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{specialiteBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{specialiteBean.delete}" update=":growl,datalist" oncomplete="cd.hide()" process = "display"/>
+                <p:commandButton value="Non" onclick="cd.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>
+
+    </h:form>
+
+</ui:composition>

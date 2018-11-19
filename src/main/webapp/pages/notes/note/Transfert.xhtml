@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="NoteTransferDlg" widgetVar="NoteTransfertDialog" modal="true" resizable="false" appendToBody="true" header="#{myBundle.Menu_Note} >> #{myBundle.CreateNoteTitle}">
+            <h:form id="NoteTransfertForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" id="pannel" >
+                        <p:outputLabel value="UE:" for="module" />
+                        <p:selectOneMenu id="module" value="#{noteBean.moduleId}" valueChangeListener="#{noteBean.processModule}" required="true" style="width: 160px"  disabled="#{noteBean.moduleDisable}"  >  
+                            <f:selectItem itemLabel="Choisir le code de l'UE" itemValue="" />  
+                            <f:selectItems value="#{noteBean.modules}"
+                                           var="modul"
+                                           itemLabel="#{modul.targetCode}"
+                                           itemValue="#{modul.id}"/> 
+                            <p:ajax update="matiere" event="change" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Matiere:" for="matiere" />
+                        <p:selectOneMenu id="matiere" value="#{noteBean.matiereTransfertId}" style="width: 160px"  required="true" disabled="#{noteBean.matiereDisable}"  >  
+                            <f:selectItem itemLabel="Choisir une matiere" itemValue="" />  
+                            <f:selectItems value="#{noteBean.matieres}"
+                                           var="mat"
+                                           itemLabel="#{mat.intitule}"
+                                           itemValue="#{mat.id}"/> 
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                         <p:inputText id="id" value="#{noteBean.selectedNote.noteId}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{noteBean.doTransfert}" value="#{myBundle.Save}" update="display,:growl" oncomplete="NoteTransfertDialog.hide()"  process = "display"   />
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="NoteTransfertDialog.hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>

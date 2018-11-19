@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="SectionCreateDlg" widgetVar="SectionCreateDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Créer Une Section">
+
+            <h:form id="SectionCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="Nom" for="nom" />
+                        <p:inputText id="nom" value="#{sectionBean.selected.nom}" title="nom section" required="true" requiredMessage="Le nom du section est obligatoire" style="width: 600px"/>
+
+                        <p:outputLabel value="Code" for="code" />
+                        <p:inputText id="code" value="#{sectionBean.selected.sigle}" title="sigle section" required="true" requiredMessage="Le sigle du section est obligatoire"/>
+
+                        <p:outputLabel value="Departement" for="departementId" />
+                        <p:selectOneMenu id="departementId" value="#{sectionBean.departementId}" required="true" requiredMessage="#{myBundle.EditNiveauRequiredMessage_departementId}" style="width: 100%">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sectionBean.listDep}"
+                                           var="departementIdItem"
+                                           itemValue="#{departementIdItem.id}"
+                                           itemLabel="#{departementIdItem.nom}"
+                                           />
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sectionBean.saveNew}" value="#{myBundle.Save}" update="display,:parent:SectionListForm:datalist,:growl" oncomplete="SectionCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SectionCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

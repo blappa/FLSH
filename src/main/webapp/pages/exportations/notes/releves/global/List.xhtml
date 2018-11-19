@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ReleveListForm" >
+            <p:dataTable var="item" value="#{releveBean.releves}"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="537"
+                         rowIndexVar="index"
+                         id="datalist"
+                         >
+
+                <p:column headerText="N°" width="50">
+                    <h:outputText value="#{item.num}" />
+                </p:column>
+                <p:column headerText="Nom Etudiant" sortBy="#{item.nomEtu}" filterBy="#{item.nomEtu}" width="230">
+                    <h:outputText value="#{item.nomEtu}"/>
+                </p:column>
+                <p:column headerText="Matricule" sortBy="#{item.matricule}" filterBy="#{item.matricule}" width="100">
+                    <h:outputText value="#{item.matricule}" />
+                </p:column>
+                <p:column headerText="Code UE" sortBy="#{item.codeUe1}" filterBy="#{item.codeUe1}" width="80">
+                    <h:outputText value="#{item.codeUe1}"/>
+                </p:column>
+                <p:column headerText="Intitule Ue" sortBy="#{item.intituleUe1}" filterBy="#{item.intituleUe1}" width="430">
+                    <h:outputText value="#{item.intituleUe1}"/>
+                </p:column>
+                <p:column headerText="Note/100" sortBy="#{item.note1}" filterBy="#{item.note1}" width="60">
+                    <h:outputText value="#{item.note1}"/>
+                </p:column>
+                <p:column headerText="Grade" sortBy="#{item.grade1}" filterBy="#{item.grade1}" width="40">
+                    <h:outputText value="#{item.grade1}"/>
+                </p:column>
+                <p:column headerText="Cote" sortBy="#{item.cote1}" filterBy="#{item.cote1}" width="40">
+                    <h:outputText value="#{item.cote1}"/>
+                </p:column>
+                <p:column headerText="Credit" sortBy="#{item.credit1}" filterBy="#{item.credit1}" width="40">
+                    <h:outputText value="#{item.credit1}"/>
+                </p:column>
+                <p:column headerText="Session" sortBy="#{item.session1}" filterBy="#{item.session1}" width="40">
+                    <h:outputText value="#{item.session1}"/>
+                </p:column>
+                <p:column headerText="Annee" sortBy="#{item.annee1}" filterBy="#{item.annee1}" width="40">
+                    <h:outputText value="#{item.annee1}"/>
+                </p:column>
+            </p:dataTable>
+    </h:form> 
+</ui:composition>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="form" >
+            <div style="font: normal 130%;color: white; background-color: #0184ff;"><h5>>>>> Gestion des importations >> Importation des etudiants Préinscits</h5></div>
+                <h:panelGrid columns="6" cellpadding="5" > 
+                      
+                    <p:outputLabel value="Departement:" for="departement" />
+                    <p:selectOneMenu id="departement" value="#{importationEtudiantBean.departementId}" valueChangeListener="#{importationEtudiantBean.processDepartement}"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                        <f:selectItems  value="#{importationEtudiantBean.departements}"
+                                        var="dep"
+                                        itemLabel="#{dep.nom}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="section,niveau,specialite,upload" event="change" />
+                    </p:selectOneMenu>  
+                    
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{importationEtudiantBean.sectionId}" valueChangeListener="#{importationEtudiantBean.processSection}"  style="width: 160px"  disabled="#{importationEtudiantBean.sectionDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{importationEtudiantBean.sections}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                        <p:ajax update="niveau,specialite,upload" event="change" />
+                    </p:selectOneMenu>  
+                    
+                    <p:outputLabel value="Niveau:" for="niveau" />
+                    <p:selectOneMenu id="niveau" value="#{importationEtudiantBean.niveauId}" valueChangeListener="#{importationEtudiantBean.processNiveau}"    style="width: 160px"  disabled="#{importationEtudiantBean.niveauDisable}" >  
+                        <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                        <f:selectItems value="#{importationEtudiantBean.niveauxAll}" />   
+                        <p:ajax update="specialite,upload" event="change" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Specialite:" for="specialite" />
+                    <p:selectOneMenu id="specialite" value="#{importationEtudiantBean.specialiteId}"  valueChangeListener="#{importationEtudiantBean.processSpecialite}"  style="width: 160px"   disabled="#{importationEtudiantBean.specialiteDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                        <f:selectItems value="#{importationEtudiantBean.specialites}" 
+                                       var="sp"
+                                       itemLabel="#{sp.nom}"
+                                       itemValue="#{sp.id}"
+                                       />  
+                        <p:ajax update="upload" event="change" />
+                   </p:selectOneMenu>
+                    
+                     <p:outputLabel value="Annee Academique" for="annee" />
+                     <p:selectOneMenu id="annee" value="#{importationEtudiantBean.anneeId}"   style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir une annee" itemValue="" />  
+                        <f:selectItems  value="#{importationEtudiantBean.anneeAcademiques}"
+                                        var="dep"
+                                        itemLabel="#{dep.annee}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="departement"  />
+                    </p:selectOneMenu>  
+                    
+                    
+                </h:panelGrid>  
+                    <p:panel visible="#{importationEtudiantBean.uploadVisible}" id="upload"> 
+     
+                <h:panelGrid columns="8" cellpadding="5"  >  
+                    <p:growl id="growl" showDetail="true" sticky="true" />  
+                    <p:fileUpload id="file"  fileUploadListener="#{importationEtudiantBean.handleFileUploadPreinscrit}"                         
+                                  mode="advanced"  
+                                  showButtons="false"
+                                  update="form:growl"
+                                  sizeLimit="10000000" 
+                                  label="Choisir le fichier excel"
+                                  allowTypes="/(\.|\/)(xls)$/" /> 
+
+                </h:panelGrid>
+                </p:panel> 
+                <p:panel> 
+                    <p:commandButton id="sol" value="Generer la fiche exemple"   actionListener="#{importationEtudiantBean.xlsPreinscrit}"  ajax="false" />
+                </p:panel> 
+            
+        </h:form> 
+
+    </ui:composition>
+</html>

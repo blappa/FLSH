@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+
+    <ui:composition>
+        <h:panelGroup id="display"  >
+           <h:panelGrid id="displayGrid" columns="6" cellpadding="5" > 
+          <p:outputLabel value="Departement:" for="departement" />
+          <p:selectOneMenu id="departement" value="#{carteBean.departementId}" valueChangeListener="#{carteBean.processDepartement}"  style="width: 160px"  >  
+                    <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                    <f:selectItems  value="#{carteBean.listDepartement}"
+                                    var="dep"
+                                    itemLabel="#{dep.nom}"
+                                    itemValue="#{dep.id}"
+                                    />  
+                    <p:ajax update="section,niveau,specialite,anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>  
+
+                <p:outputLabel value="Section" for="section" />
+                <p:selectOneMenu id="section" value="#{carteBean.sectionId}" valueChangeListener="#{carteBean.processSection}"  required="true" style="width: 160px"  disabled="#{carteBean.sectionDisable}"   >  
+                    <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                    <f:selectItems  value="#{carteBean.listSection}"
+                                    var="sec"
+                                    itemLabel="#{sec.nom}"
+                                    itemValue="#{sec.id}"
+                                    />  
+                    <p:ajax update="niveau,specialite,anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>  
+
+                <p:outputLabel value="Niveau:" for="niveau" />
+                <p:selectOneMenu id="niveau" value="#{carteBean.niveauId}" valueChangeListener="#{carteBean.processNiveau}"   required="true" style="width: 160px"  disabled="#{carteBean.niveauDisable}" >  
+                    <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                    <f:selectItems value="#{carteBean.niveaux}" /> 
+                    <p:ajax update="specialite,anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Specialite:" for="specialite" />
+                <p:selectOneMenu id="specialite" value="#{carteBean.specialiteId}" valueChangeListener="#{carteBean.processSpecialite}" required="true"  style="width: 160px"   disabled="#{carteBean.specialiteDisable}"   >  
+                    <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                    <f:selectItems value="#{carteBean.listSpecialite}" 
+                                   var="sp"
+                                   itemLabel="#{sp.nom}"
+                                   itemValue="#{sp.id}"
+                                   />  
+                    <p:ajax update="anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                <p:selectOneMenu id="anneeAcademiqueid" value="#{carteBean.anneeAcademiqueid}" required="true" style="width: 160px"  >
+                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                    <f:selectItems value="#{carteBean.listAnneeAcademique}"
+                                   var="anneeAcademiqueidItem"
+                                   itemValue="#{anneeAcademiqueidItem.id}"
+                                   itemLabel="#{anneeAcademiqueidItem.annee}"
+                                   />
+               </p:selectOneMenu>
+
+               
+                
+          </h:panelGrid>
+            <p:commandButton  value="Exporter"  actionListener="#{carteBean.PDF}"  style="text-decoration : blue;" ajax="false"  />
+        </h:panelGroup>
+
+
+       
+    </ui:composition>
+</html>
+

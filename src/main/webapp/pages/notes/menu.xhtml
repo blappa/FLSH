@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+    <ui:composition>
+        <h:form>
+            <p:panel visible="#{loginController.doyen()}">
+                <p:menubar >  
+                    <p:menuitem icon="ui-icon-document-b" value="Notes | " url="/a45" style="margin-left: 10px;" />
+                    <p:menuitem icon="ui-icon-note" value="Procès verbal | " url="/a47" style="margin-left: 10px;" />
+                    <p:submenu  icon="ui-icon-document-b" label="Listes | " style="margin-left: 10px;" >                               
+                        <p:menuitem value="Liste des admis" url="/a48" />
+                        <p:separator />
+                        <p:menuitem value="Liste des chevauchements" url="/a49" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-document-b" label="Synthèses | " style="margin-left: 10px;">                                
+                        <p:menuitem value="Semestrielle" url="/a50" />
+                        <p:separator />
+                        <p:menuitem value="Annuelle" url="/a51" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-circle-check" label="Valider | "  style="margin-left: 10px;">                              
+                        <p:menuitem value="Passages de fin d'anne" url="/pages/notes/valider/passage/index.xhtml" />
+                        <p:separator />
+                        <p:menuitem value="Chevauchements au premier semestre" url="/pages/notes/valider/chevauche/index.xhtml" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-circle-arrow-s" label="Requête par specialité" style="margin-left: 10px;">
+                        <p:menuitem value="Format excel" url="/a223" />
+                    </p:submenu>
+                </p:menubar>
+            </p:panel>
+
+
+            <p:panel visible="#{loginController.infor()}">
+                <p:menubar >  
+                    <p:menuitem icon="ui-icon-document-b" value="Notes | " url="/a45" style="margin-left: 10px;" />
+                    <p:menuitem icon="ui-icon-note" value="Procès verbal | " url="/a47" style="margin-left: 10px;" />
+                    <p:submenu  icon="ui-icon-document-b" label="Listes | " style="margin-left: 10px;" >                               
+                        <p:menuitem value="Liste des admis" url="/a48" />
+                        <p:separator />
+                        <p:menuitem value="Liste des chevauchements" url="/a49" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-document-b" label="Synthèses | " style="margin-left: 10px;">                                
+                        <p:menuitem value="Semestrielle" url="/a50" />
+                        <p:separator />
+                        <p:menuitem value="Annuelle" url="/a51" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-circle-check" label="Valider | "  style="margin-left: 10px;">                              
+                        <p:menuitem value="Passages de fin d'anne" url="/pages/notes/valider/passage/index.xhtml" />
+                        <p:separator />
+                        <p:menuitem value="Chevauchements au premier semestre" url="/pages/notes/valider/chevauche/index.xhtml" />
+                    </p:submenu>
+                    <p:submenu icon="ui-icon-circle-arrow-s" label="Requête par specialité" style="margin-left: 10px;">
+                        <p:menuitem value="Format excel" url="/a223" />
+                    </p:submenu>
+                </p:menubar>
+            </p:panel>
+
+
+
+            <p:panel visible="#{loginController.dep()}">
+                <p:menubar >  
+                    <p:menuitem icon="ui-icon-document-b" value="Afficher les notes" url="/a45"  />
+                </p:menubar>
+            </p:panel>
+
+
+            <p:panel visible="#{loginController.stat()}">
+                <p:menubar >  
+                    <p:menuitem icon="ui-icon-document-b" value="Afficher les notes" url="/a45"  />
+                </p:menubar>
+            </p:panel>
+        </h:form> 
+    </ui:composition>
+
+</html>

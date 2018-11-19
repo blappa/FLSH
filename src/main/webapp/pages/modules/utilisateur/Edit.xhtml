@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="UtilisateurEditDlg" widgetVar="UtilisateurEditDialog" modal="true" resizable="false" appendToBody="true" header=" Modules >> Configuration >> Edit Utilisateur">
+
+            <h:form id="UtilisateurEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{utilisateurBean.selected != null}">
+                        
+                         <h:outputLabel value="Username" for="username" />
+                         <p:inputText  id="username" value="#{utilisateurBean.selected.username}" required="true"/>
+
+
+                        <p:outputLabel value="Nom et Prénom" for="nom" />
+                        <p:inputText id="nom" value="#{utilisateurBean.selected.name}" required="true" requiredMessage="Le nom du utilisateur est obligatoire"/>
+
+
+                        <p:outputLabel value="Password" for="password" />
+                        <p:password id="password" value="#{utilisateurBean.selected.password}" required="true" requiredMessage="Le password du utilisateur est obligatoire"/>
+
+                        <p:outputLabel value="ROLE" for="authority" />
+                        <p:selectOneMenu id="authority" value="#{utilisateurBean.idAutority}" required="true">
+                            <f:selectItem itemLabel="#{utilisateurBean.selected.autorisation.authority}" itemValue="#{utilisateurBean.selected.autorisation.id}"/>
+                            <f:selectItems value="#{utilisateurBean.autos}"
+                                           var="autoIdItem"
+                                           itemValue="#{autoIdItem.id}"
+                                           itemLabel="#{autoIdItem.authority}"
+                                           />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Departement" for="dep" />
+                        <p:selectOneMenu id="dep" value="#{utilisateurBean.departementId}" >
+                            <f:selectItem itemLabel="#{utilisateurBean.selected.departement.nom}" itemValue="#{utilisateurBean.selected.departement.id}"/>
+                              <f:selectItem itemLabel="Tous les departements" itemValue=""/>
+                           <f:selectItems value="#{utilisateurBean.departements}"
+                                           
+                                           var="departementItem"
+                                           itemValue="#{departementItem.id}"
+                                           itemLabel="#{departementItem.nom}"
+                                           />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="anabled"  value="Etat"/>
+                        <p:selectOneMenu id="anabled" value="#{utilisateurBean.etat}" style="width: 180px;" required="true" >
+                            <f:selectItem itemLabel="#{utilisateurBean.selected.enabled}" itemValue="#{utilisateurBean.selected.enabled}"/>
+                            <f:selectItem itemLabel="Activé" itemValue="1"/>
+                            <f:selectItem itemLabel="Désactivé" itemValue="0"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText  value="#{utilisateurBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{utilisateurBean.update}" value="#{myBundle.Save}" update="display,:parent:UtilisateurListForm:datalist,:growl" oncomplete="UtilisateurEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="UtilisateurEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NiveauEditDlg" widgetVar="NiveauEditDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Editer Niveau">
+
+            <h:form id="NiveauEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{niveauBean.selected != null}">
+
+                        <p:outputLabel value="Level" for="level" />
+                        <p:selectOneMenu id="level" value="#{niveauBean.selected.level}"  >
+                            <f:selectItem itemValue="#" itemLabel="choisir" /> 
+                            <f:selectItem itemValue="1" itemLabel="1" /> 
+                            <f:selectItem itemValue="2" itemLabel="2" /> 
+                            <f:selectItem itemValue="3" itemLabel="3" /> 
+                            <f:selectItem itemValue="4" itemLabel="4" />
+                            <f:selectItem itemValue="5" itemLabel="5" />
+                        </p:selectOneMenu>  
+
+                        <p:outputLabel value="Section" for="sectionId" />
+                        <p:selectOneMenu id="sectionId" value="#{niveauBean.sectionId}" required="true" requiredMessage="#{myBundle.EditNiveauRequiredMessage_sectionId}" style="width: 100%">
+                            <f:selectItem itemLabel="#{niveauBean.selected.section.sigle}" itemValue="#{niveauBean.selected.section.id}"/>
+                            <f:selectItems value="#{niveauBean.listSec}"
+                                           var="sectionIdItem"
+                                           itemValue="#{sectionIdItem.id}"
+                                           itemLabel="#{sectionIdItem.sigle}  #{sectionIdItem.departement.sigle}"
+                                           />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{niveauBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{niveauBean.update}" value="#{myBundle.Save}" update="display,:parent:NiveauListForm:datalist,:growl" oncomplete="NiveauEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="NiveauEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

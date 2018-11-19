@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+        <p:dialog id="NoteEditDlg" widgetVar="NoteEditDialog" modal="true" resizable="true" appendToBody="true"  header="Modification d'une note">
+            <h:form id="NoteEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" id="pannel" >
+                        <p:outputLabel value="Type" for="type" />
+                        <p:selectOneMenu id="type"  value="#{noteBean.typeOp}" required="true"   >
+                            <f:selectItem itemLabel="type d'operation" itemValue=""/>    
+                            <f:selectItem itemValue="1" itemLabel="simple modification"/>
+                            <f:selectItem itemValue="2" itemLabel="requete"/>
+                            <p:ajax update="@this" event="change" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="TPE" for="tpe" />
+                        <p:inputText id="tpe" value="#{noteBean.selectedNote.tpe}" title="#{myBundle.CreateMatiereTitle_intitule}" />
+
+                        <p:outputLabel value="TD" for="td" />
+                        <p:inputText id="td" value="#{noteBean.selectedNote.td}" title="#{myBundle.CreateMatiereTitle_intitule}" />
+
+                        <p:outputLabel value="CC" for="cc" />
+                        <p:inputText id="cc" value="#{noteBean.selectedNote.cc}" title="#{myBundle.CreateMatiereTitle_intitule}" />
+
+                        <p:outputLabel value="Anonymat d'examen" for="anoe" />
+                        <p:inputText id="anoe" value="#{noteBean.selectedNote.anoExam}" title="#{myBundle.CreateMatiereTitle_intitule}" />
+
+                        <p:outputLabel value="Note d'examen" for="exam" />
+                        <p:inputText id="exam" value="#{noteBean.selectedNote.ee}" title="#{myBundle.CreateMatiereTitle_intitule}" />
+
+                        <p:outputLabel value="Anonymat du ratrappage" for="anor" />
+                        <p:inputText id="anor" value="#{noteBean.selectedNote.anoRat}" title="#{myBundle.CreateMatiereTitle_intitule}" />
+
+                        <p:outputLabel value="Note de ratrappage" for="rat" />
+                        <p:inputText id="rat" value="#{noteBean.selectedNote.rat}" title="#{myBundle.CreateMatiereTitle_intitule}" />
+                    </p:panelGrid>
+                     <p:panel visible="false">
+                         <p:inputText id="id" value="#{noteBean.selectedNote.noteId}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{noteBean.doUpdate}" value="#{myBundle.Save}" update="display,:growl" oncomplete="NoteEditDialog.hide()"  process = "display"   />
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="NoteEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+    </ui:composition>
+
+</html>

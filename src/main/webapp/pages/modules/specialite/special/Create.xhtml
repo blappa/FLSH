@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SpecialiteCreateDlg" widgetVar="SpecialiteCreateDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Créer Specialite">
+
+            <h:form id="SpecialiteCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{specialiteBean.selected.code}" title="#{myBundle.CreateSpecialiteTitle_code}" />
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{specialiteBean.selected.nom}" title="#{myBundle.CreateSpecialiteTitle_nom}" />
+
+                        <p:outputLabel value="Departement:" for="departement" />
+                        <p:selectOneMenu id="departement" value="#{specialiteBean.departementId}" valueChangeListener="#{specialiteBean.processDepartement}"  style="width: 160px"  >  
+                            <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                            <f:selectItems  value="#{specialiteBean.listDepartement}"
+                                            var="dep"
+                                            itemLabel="#{dep.nom}"
+                                            itemValue="#{dep.id}"
+                                            />  
+                            <p:ajax update="section,niveau,specialite" event="change" />
+                        </p:selectOneMenu>  
+
+                        <p:outputLabel value="Section" for="section" />
+                        <p:selectOneMenu id="section" value="#{specialiteBean.sectionId}" valueChangeListener="#{specialiteBean.processSection}"  style="width: 160px"  disabled="#{specialiteBean.sectionDisable}"   >  
+                            <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                            <f:selectItems  value="#{specialiteBean.sections}"
+                                            var="sec"
+                                            itemLabel="#{sec.nom}"
+                                            itemValue="#{sec.id}"
+                                            />  
+                            <p:ajax update="niveau,specialite" event="change" />
+                        </p:selectOneMenu>  
+
+                        <p:outputLabel value="Niveau:" for="niveau" />
+                        <p:selectOneMenu id="niveau" value="#{specialiteBean.level}" valueChangeListener="#{specialiteBean.processNiveau}"    style="width: 160px"  disabled="#{specialiteBean.niveauDisable}" >  
+                            <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                            <f:selectItems value="#{specialiteBean.niveaus}"
+                                           var="niv"
+                                           itemLabel="niveau #{niv.level}"
+                                           itemValue="#{niv.id}"
+                                           />  
+                            <p:ajax update="specialite" event="change" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Specialite:" for="specialite" />
+                        <p:selectOneMenu id="specialite" value="#{specialiteBean.specialiteId}"    style="width: 160px"   disabled="#{specialiteBean.specialiteDisable}"   >  
+                            <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                            <f:selectItems value="#{specialiteBean.specialites}" 
+                                           var="sp"
+                                           itemLabel="#{sp.nom}"
+                                           itemValue="#{sp.id}"
+                                           />  
+                        </p:selectOneMenu>
+                        
+                        
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{specialiteBean.saveNewSpecial}" value="#{myBundle.Save}" update="display,:parent:SpecialiteListForm:datalist,:growl" oncomplete="SpecialiteCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SpecialiteCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

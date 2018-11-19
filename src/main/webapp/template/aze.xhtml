@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <h:outputStylesheet library="css" name="styles.css" /> 
+                <link rel="icon" type="image/x-icon" href="#{request.contextPath}/resources/images/logo.png"/>
+                <title><ui:insert name="title">Bienvenue</ui:insert></title>
+            </f:facet>
+            <script type="application/x-javascript"> function extLegend() 
+                {
+                this.cfg.legend= {
+                show: true,
+                location: 'e',
+                placement: 'outsideGrid'
+                };
+                } </script>
+        </h:head>
+        <h:body>
+            <p:growl id="growl" life="30000"/>
+            <p:layout fullPage="true" >
+
+                <p:layoutUnit position="north" size="145" resizable="false" closable="true" collapsible="true">
+                    <div id="top">
+                        <h:form  class="header">
+                            <p:menubar styleClass="headerItem"  style="margin-left: 75%;">
+
+                                <p:menuitem value=" #{loginController.printWelcome()}" title="Vous etes maintenant connecté sur SYGE" icon="ui-icon-person"  style="color: white;font-weight : bold;"/> 
+
+                                <p:submenu icon="ui-icon-wrench" style="left: 10%;"  transient="true" label="Paramètres">
+                                    <!--<p:menuitem value="#{myBundle.Menu_Profil}" url="#" />-->
+                                    <p:menuitem icon="ui-icon-pencil" value="Langue" url="/a67" onclick="fmenu.submit();"/>
+                                    <p:menuitem icon="ui-icon-pencil" value="Mot de passe" url="/a61" onclick="fmenu.submit();"/>
+                                    <p:menuitem icon="ui-icon-extlink" value="#{myBundle.Menu_donnecter}" url="/j_spring_security_logout" />
+
+                                </p:submenu>
+                            </p:menubar>
+                        </h:form>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit  position="south" size="50" collapsible="true" >
+                    <div id="signa" style="text-align: center;font: normal small-caps 150% fantasy"> 
+                        <h:outputLabel value="&copy; 2016 SYGE Tous droits reserves" />
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="250" header="MENU PRINCIPAL" collapsible="true">
+                    <div id="left_content">
+                        <ui:insert name="top"><ui:include src="menu.xhtml" /></ui:insert>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <div id="top_content">
+                        <ui:insert name="top_content"></ui:insert>
+                    </div>
+                    <h:form id="parent">
+                        <div id="lef_content">
+                            <ui:insert name="left"> </ui:insert>
+                            <input type="hidden" name="${_csrf.parameterName}"
+                           value="${_csrf.token}" />
+                        </div>
+                        <div id="right_content">
+                            <ui:insert name="content"></ui:insert>
+                            <input type="hidden" name="${_csrf.parameterName}"
+                           value="${_csrf.token}" />
+                        </div>
+                         
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+
+
+</html>
+

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="form" >
+            <p:panel header="mise a jour de la situation financiere des etudiants" style="padding-bottom: 28%;">  
+
+                <h:panelGrid columns="6" cellpadding="5" > 
+                    <p:outputLabel value="Type de payement :" for="payement" />
+                    <p:selectOneMenu id="payement" value="#{importationEtudiantBean.typepayment}"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="choisir le type de payement" itemValue="" />
+                        <f:selectItem itemLabel="Premiere tranche" itemValue="1" />
+                        <f:selectItem itemLabel="Seconde tranche" itemValue="2" />
+                        <f:selectItem itemLabel="Totalite" itemValue="3" />
+                        <p:ajax update="annee" event="change" />
+                    </p:selectOneMenu>  
+
+
+                    <p:outputLabel value="Annee Academique" for="annee" />
+                    <p:selectOneMenu id="annee" value="#{importationEtudiantBean.anneeId}"   style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir une annee" itemValue="" />  
+                        <f:selectItems  value="#{importationEtudiantBean.anneeAcademiques}"
+                                        var="ann"
+                                        itemLabel="#{ann.annee}"
+                                        itemValue="#{ann.id}"
+                                        />
+                        <p:ajax update="upload" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Type operation" for="type" />
+                    <p:selectOneMenu id="type"  value="#{importationEtudiantBean.typeOp}" required="true"   >
+                        <f:selectItem itemLabel="type d'operation" itemValue=""/>
+                        <f:selectItem itemValue="1" itemLabel="rien"/>
+                        <f:selectItem itemValue="2" itemLabel="simple modification"/>
+                        <f:selectItem itemValue="3" itemLabel="requete"/>
+                        <p:ajax update="@this" event="change" />
+                    </p:selectOneMenu>
+
+
+                </h:panelGrid>  
+                <p:panel  id="upload"> 
+
+                    <h:panelGrid columns="8" cellpadding="5"  >  
+                        <p:growl id="growl" showDetail="true" sticky="true" escape="false" />  
+                        <p:fileUpload id="file"  fileUploadListener="#{importationEtudiantBean.handleFileUploadPaid}"                         
+                                      mode="advanced"  
+                                      showButtons="false"
+                                      update="form:growl"
+                                      sizeLimit="10000000" 
+                                      label="Choisir le fichier excel"
+                                      allowTypes="/(\.|\/)(xls)$/" /> 
+                    </h:panelGrid>
+                </p:panel> 
+                <p:panel> 
+                    <p:commandButton id="sol" value="Generer la fiche exemple"   actionListener="#{importationEtudiantBean.xlsSolvable}"  ajax="false" />
+                </p:panel> 
+
+            </p:panel> 
+        </h:form> 
+
+    </ui:composition>
+</html>

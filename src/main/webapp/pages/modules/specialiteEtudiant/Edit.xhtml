@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SpecialiteEtudiantEditDlg" widgetVar="SpecialiteEtudiantEditDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Editer Specialite Etudiant">
+
+            <h:form id="SpecialiteEtudiantEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{specialiteEtudiantBean.selected != null}">
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteEtudiantLabel_etudiantId}" for="etudiantId" />
+                        <p:selectOneMenu id="etudiantId" value="#{specialiteEtudiantBean.etudiantId}" required="true" requiredMessage="#{myBundle.EditSpecialiteEtudiantRequiredMessage_etudiantId}">
+                            <f:selectItem itemLabel="#{specialiteEtudiantBean.selected.etudiant.nom}" itemValue="#{specialiteEtudiantBean.selected.etudiant.id}"/>
+                            <f:selectItems value="#{specialiteEtudiantBean.listEtudiant}"
+                                           var="etudiantIdItem"
+                                           itemValue="#{etudiantIdItem.id}"
+                                           itemLabel="#{etudiantIdItem.nom}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteEtudiantLabel_specialiteId}" for="specialiteId" />
+                        <p:selectOneMenu id="specialiteId" value="#{specialiteEtudiantBean.specialiteId}" required="true" requiredMessage="#{myBundle.EditSpecialiteEtudiantRequiredMessage_specialiteId}">
+                            <f:selectItem itemLabel="#{specialiteEtudiantBean.selected.specialite.nom}" itemValue="#{specialiteEtudiantBean.selected.specialite.id}"/>
+                            <f:selectItems value="#{specialiteEtudiantBean.listSpecialite}"
+                                           var="specialiteIdItem"
+                                           itemValue="#{specialiteIdItem.id}"
+                                           itemLabel="#{specialiteIdItem.code}"
+                                           />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Annee Academique" for="annneeId" />
+                        <p:selectOneMenu id="annneeId" value="#{specialiteEtudiantBean.anneeId}" required="true" requiredMessage="L'annee academique est obligatoire">
+                            <f:selectItem itemLabel="#{specialiteEtudiantBean.selected.anneeAcademique.annee}" itemValue="#{specialiteEtudiantBean.selected.anneeAcademique.id}"/>
+                            <f:selectItems value="#{specialiteEtudiantBean.listAnnees}"
+                                           var="anneeIdItem"
+                                           itemValue="#{anneeIdItem.id}"
+                                           itemLabel="#{anneeIdItem.annee}"
+                                           />
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{specialiteEtudiantBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{specialiteEtudiantBean.update}" value="#{myBundle.Save}" update="display,:parent:SpecialiteEtudiantListForm:datalist,:growl" oncomplete="SpecialiteEtudiantEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SpecialiteEtudiantEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

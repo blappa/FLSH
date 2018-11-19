@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="form" >
+             <div style="font: normal 130%;color: white; background-color: #0184ff;"><h5>>>>> Gestion des importations >> Importation des notes existantes par matière</h5></div>
+                <h:panelGrid columns="6" cellpadding="5" > 
+                    
+                    <p:outputLabel value="Comportement:" for="comportement" />
+                    <p:selectOneMenu id="comportement" value="#{importationNoteBean.comportement}"  style="width: 160px" required="true"  >  
+                        <f:selectItem itemLabel="choisir l'operation a effectuer" itemValue="" />
+                        <f:selectItem itemLabel="Continuer" itemValue="cont" />
+                        <f:selectItem itemLabel="Recommencer" itemValue="rec" />
+                        <p:ajax update="departement" event="change" />
+                    </p:selectOneMenu> 
+
+                    <p:outputLabel value="Departement:" for="departement" />
+                    <p:selectOneMenu id="departement" value="#{importationNoteBean.departementId}" valueChangeListener="#{importationNoteBean.processDepartement}"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                        <f:selectItems  value="#{importationNoteBean.departements}"
+                                        var="dep"
+                                        itemLabel="#{dep.nom}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="section,niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{importationNoteBean.sectionId}" valueChangeListener="#{importationNoteBean.processSection}"  style="width: 160px"  disabled="#{importationNoteBean.sectionDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{importationNoteBean.sections}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                        <p:ajax update="niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Niveau:" for="niveau" />
+                    <p:selectOneMenu id="niveau" value="#{importationNoteBean.niveauId}" valueChangeListener="#{importationNoteBean.processNiveau}"    style="width: 160px"  disabled="#{importationNoteBean.niveauDisable}" >  
+                        <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                         <f:selectItems value="#{importationNoteBean.niveaux}" /> 
+                        <p:ajax update="specialite" event="change" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Specialite:" for="specialite" />
+                    <p:selectOneMenu id="specialite" value="#{importationNoteBean.specialiteId}"    style="width: 160px"   disabled="#{importationNoteBean.specialiteDisable}"  required="true"  >  
+                        <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                        <f:selectItems value="#{importationNoteBean.specialites}" 
+                                       var="sp"
+                                       itemLabel="#{sp.nom}"
+                                       itemValue="#{sp.id}"
+                                       />  
+                             <p:ajax update="ue" event="change" />
+                     </p:selectOneMenu>
+
+                    <p:outputLabel value="Annee Academique" for="annee" />
+                    <p:selectOneMenu id="annee" value="#{importationNoteBean.anneeId}"   style="width: 160px" valueChangeListener="#{importationNoteBean.processAnnee}"  >  
+                        <f:selectItem itemLabel="Choisir une annee" itemValue="" />  
+                        <f:selectItems  value="#{importationEtudiantBean.anneeAcademiques}"
+                                        var="dep"
+                                        itemLabel="#{dep.annee}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="ue,matiere,upload" event="change"   />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="UE" for="ue" />
+                    <p:selectOneMenu id="ue" value="#{importationNoteBean.moduleId}" style="width: 160px"  disabled="#{importationNoteBean.moduleDisable}" valueChangeListener="#{importationNoteBean.processUE}" >  
+                        <f:selectItem itemLabel="Choisir une ue" itemValue="" />  
+                        <f:selectItems value="#{importationNoteBean.modules}"
+                                       var="m"
+                                       itemLabel="#{m.targetCode}"
+                                       itemValue="#{m.id}"/> 
+                        <p:ajax update="matiere,upload" event="change" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Matiere:" for="matiere" />
+                    <p:selectOneMenu id="matiere" value="#{importationNoteBean.matiereId}" style="width: 160px"  disabled="#{importationNoteBean.matiereDisable}" valueChangeListener="#{importationNoteBean.processMatiere}" >  
+                        <f:selectItem itemLabel="Choisir une matiere" itemValue="" />  
+                        <f:selectItems value="#{importationNoteBean.matieres}"
+                                       var="mat"
+                                       itemLabel="#{mat.intitule}"
+                                       itemValue="#{mat.id}"/> 
+                        <p:ajax update="upload" event="change" />
+                    </p:selectOneMenu>
+                </h:panelGrid>  
+
+                <p:panel visible="#{importationNoteBean.uploadVisible}" id="upload"> 
+
+                    <h:panelGrid columns="8" cellpadding="5"  >  
+                        <p:growl id="growl" showDetail="true" sticky="true" escape="false"  />  
+                        <p:fileUpload id="file"  fileUploadListener="#{importationNoteBean.handleFileUpload}"                         
+                                      mode="advanced"  
+                                      showButtons="false"
+                                      update="form:growl"
+                                      sizeLimit="10000000" 
+                                      label="Choisir le fichier excel"
+                                      allowTypes="/(\.|\/)(xls)$/" /> 
+
+                    </h:panelGrid>
+                </p:panel> 
+                <p:panel> 
+                    <p:commandButton id="sol" value="Generer la fiche exemple"   actionListener="#{importationNoteBean.xlsNoteMatiere}"  ajax="false" />
+                </p:panel> 
+        </h:form> 
+
+    </ui:composition>
+</html>

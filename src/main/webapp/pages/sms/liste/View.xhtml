@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="SmsViewDlg" widgetVar="SmsViewDialog" modal="true" resizable="false" appendToBody="true" header="Détails sur une souscription">
+            <h:form id="SmsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{smsBean.selected != null}">
+
+                        <h:outputText  value="Matricule" />
+                        <h:outputText   value="#{smsBean.selected.etudiant.matricule}" title="matricule de l'etudiant" />
+
+                        <h:outputText  value="Section"  />
+                        <h:outputText   value="#{smsBean.selected.section.nom}" title="section de l'etudiant" />
+
+                        <h:outputText  value="Département"  />
+                        <h:outputText   value="#{smsBean.selected.section.departement.nom}" title="département de l'etudiant" />
+
+                        <h:outputText value="Numéro Orange"  />
+                        <h:outputText   value="#{smsBean.selected.etudiant.orange}" title="numero orange" />
+
+                        <h:outputText value="Numéro Mtn"  />
+                        <h:outputText value="#{smsBean.selected.etudiant.mtn}" title="numero mtn" />
+
+                        <h:outputText value="Numéro nexttel"  />
+                        <h:outputText value="#{smsBean.selected.etudiant.nextel}" title="numero nexttel" />
+
+                        <h:outputText value="Numéro inter. "  />
+                        <h:outputText value="#{smsBean.selected.etudiant.internationnal}" title="numero internationnal" />
+
+                        <h:outputText value="Type de souscription "  />
+                        <h:outputText value="#{smsBean.selected.type}" title="type de souscription" />
+
+                        <h:outputText value="Année académique "  />
+                        <h:outputText value="#{smsBean.selected.anneeAcademique.annee}" title="année de souscription" />
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="SmsViewDialog.hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <ui:composition template="/template/aze.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Profil d'un étudiant"></h:outputText>
+        </ui:define>
+        <ui:define name="top_content"><ui:include src="../menu.xhtml"/></ui:define>
+        <ui:define name="left">
+                 <div style="font: normal  130% ;color: white; background-color: #0184ff;"><h5>>>>> Gestion des etudiants >> profil etudiant</h5></div>
+                <h:form  >
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Type" for="type" />
+                    <p:selectOneMenu id="type"  value="#{etudiantBean.typeProfil}" required="true"   >
+                        <f:selectItem itemLabel="type de profil" itemValue=""/>    
+                        <f:selectItem itemLabel="specialites" itemValue="sp"/>
+                        <f:selectItem itemLabel="notes" itemValue="nt"/>
+                     </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Matricule Etudiant" for="mat" />
+                            <p:inputText id="mat" value="#{etudiantBean.matricule}" />                     
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{etudiantBean.PDF}" value="Exporter" update=":growl" ajax="false" style="margin-top: 3%"/>
+                    </h:panelGroup>
+                </h:form>
+        </ui:define>
+  
+    </ui:composition>
+</html>
+
+
+
+

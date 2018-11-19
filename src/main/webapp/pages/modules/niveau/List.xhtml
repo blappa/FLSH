@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="NiveauListForm">
+
+        <p:panel header="Module >> Liste Niveau">
+
+            <p:dataTable id="datalist" value="#{niveauBean.items}" var="item"
+                         selectionMode="single" selection="#{niveauBean.selected}"
+                         rowKey="#{item.id}"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="460"
+                         rowIndexVar="index"
+                         >
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="No"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{item.section.sigle}" filterBy="#{item.section.sigle}"  width="400">
+                    <f:facet name="header">
+                        <h:outputText value="Sigle Section"/>
+                    </f:facet>
+                    <h:outputText value="#{item.section.sigle}"/>
+                </p:column>
+                <p:column sortBy="#{item.level}" filterBy="#{item.level}"  width="998"> 
+                    <f:facet name="header">
+                        <h:outputText value="Level"/>
+                    </f:facet>
+                    <h:outputText value="#{item.level}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{niveauBean.prepare}"  oncomplete="NiveauCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":parent:NiveauViewForm" oncomplete="NiveauViewDialog.show()" disabled="#{empty niveauBean.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" update=":parent:NiveauListForm:confirm" oncomplete="cd.show();" disabled="#{empty niveauBean.selected}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+        <p:dialog id="confirm" header="Etez-vous sur de bien vouloir supprimer cette élèment ?" modal="true" resizable="true" appendToBody="true" widgetVar="cd">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="1" rendered="#{niveauBean.selected != null}">
+                    <h:outputText value="Niveau : #{niveauBean.selected.level}"/>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{niveauBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{niveauBean.delete}" update=":growl,datalist" oncomplete="cd.hide()" process = "display"/>
+                <p:commandButton value="Non" onclick="cd.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>
+    </h:form>
+
+</ui:composition>

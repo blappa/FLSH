@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="MatiereEditDlg" widgetVar="MatiereEditDialog" modal="true" resizable="true" appendToBody="true" header="Module >> Editer Matiere">
+            <h:form id="MatiereEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{matiereBean.selected != null}">
+                        <p:outputLabel value="#{myBundle.CreateMatiereLabel_intitule}" for="intitule" />
+                        <p:inputText id="intitule" value="#{matiereBean.selected.intitule}" title="#{myBundle.CreateMatiereTitle_intitule}" style="width: 600px" />
+                        <p:outputLabel value="Code" for="code" />
+                        <p:inputText id="code" value="#{matiereBean.selected.code}" title="code de la matiere" />
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{matiereBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{matiereBean.update}" value="#{myBundle.Save}" update="display,:growl" oncomplete="MatiereEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="MatiereEditDialog.hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>

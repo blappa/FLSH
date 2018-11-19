@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="MatiereCreateDlg" widgetVar="MatiereCreateDialog" modal="true" resizable="false" appendToBody="true" header="Modules >> Créer une Matiere">
+            <h:form id="MatiereCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+                        <p:outputLabel value="#{myBundle.CreateMatiereLabel_intitule}" for="intitule" />
+                        <p:inputText id="intitule" value="#{matiereBean.selected.intitule}" title="#{myBundle.CreateMatiereTitle_intitule}"  style="width: 600px" />
+                        <p:outputLabel value="Code" for="code" />
+                        <p:inputText id="code" value="#{matiereBean.selected.code}" title="code de la matiere" />
+                    
+                        <p:outputLabel value="Module" for="moduleId" />
+                        <p:selectOneMenu  filter="true" filterMatchMode="startsWith" id="moduleId" value="#{matiereBean.moduleId}" required="true" requiredMessage="#{myBundle.EditMatiereRequiredMessage_moduleId}">
+                            <f:selectItem   itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{matiereBean.listSpe}"
+                                           var="moduleIdItem"
+                                           itemValue="#{moduleIdItem.id}"
+                                           itemLabel="#{moduleIdItem.targetCode} #{moduleIdItem.specialite.nom} #{moduleIdItem.anneeAcademique.annee} #{moduleIdItem.specialite.niveau.section.sigle}"
+                                           />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{matiereBean.saveNew}" value="#{myBundle.Save}" update="display,:growl" oncomplete="MatiereCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="MatiereCreateDialog.hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reussite" pageWidth="595" pageHeight="20000" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="c3b6c775-759f-463b-835a-17d4b1ab7017">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="276"/>
+	<field name="niveau" class="java.lang.String"/>
+	<field name="dep" class="java.lang.String"/>
+	<field name="nbreEtCom" class="java.lang.String"/>
+	<field name="nbreEtSol" class="java.lang.String"/>
+	<field name="nbreEtAd" class="java.lang.String"/>
+	<field name="percentAd" class="java.lang.String"/>
+	<field name="section" class="java.lang.String"/>
+	<field name="spec" class="java.lang.String"/>
+	<field name="annee" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="179" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="210" height="10" uuid="a329d5e9-54de-403a-8a0a-73f8335d7412"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DU CAMEROUN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="210" height="10" uuid="9aa4bac2-0381-42d4-ab3f-13cb4f7c303d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Paix - Travail - Patrie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="210" height="11" uuid="30400b06-4a4e-448c-98e4-1c2c9cb2d355"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[MINISTERE DE L'ENSEIGNEMENT SUPERIEUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="210" height="10" uuid="763e0a17-5d68-464f-b80e-a14cba7d54a8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[******]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="51" width="210" height="10" uuid="aaf29556-ece0-4343-8a9e-4b2890ccfa47"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="239" y="0" width="77" height="111" uuid="b68b0dbf-d712-483e-a022-4ac8a5b62f53"/>
+				<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="222" y="133" width="137" height="11" uuid="8a29bfc2-76d7-4c29-af2a-ac1967f7b58c"/>
+				<textElement verticalAlignment="Middle" rotation="None">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Tél : (+237) 22 29 30 99]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="122" width="122" height="11" uuid="6066d390-1fb9-42f2-bf76-4a29475b0c5c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BP : 644 Maroua]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="81" width="210" height="10" uuid="7da8c249-06be-446e-b575-7afff007cea3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FACULE DES LETTRES ET SCIENCES HUMAINES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="61" width="210" height="10" uuid="fccda641-dba6-4c70-b64a-5750dbab4608"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[UNIVERSITE DE MAROUA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="71" width="210" height="10" uuid="d163b706-7149-4aea-a11a-9100cc1d12a9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="91" width="210" height="10" uuid="84cbaa0d-0f07-4318-9abc-1966843d747b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="101" width="210" height="10" uuid="98661c55-a6aa-4e5a-9553-851a1b4fcefe"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[DECANAT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="111" width="210" height="11" uuid="7e9db0f4-7ee8-4219-b81f-893468462e0d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="143" width="210" height="10" uuid="35408f49-fac4-48a7-8300-1a27bf6db0ac"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="122" width="188" height="22" uuid="a7529f13-7ae2-40f0-8787-b3f16aed4a0a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vice-Doyen chargé de la Scolarité et du Suivi des Etudiants]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="153" width="210" height="26" uuid="e46f13d5-5475-4cd1-babb-b783ab7af77b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chef de Service de la Scolarité et des Statistiques]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="90" width="211" height="10" uuid="0b4d8098-0a6f-4ee3-b8ac-369d384018e9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="100" width="212" height="11" uuid="6e8edbf5-8197-479c-9cc9-3ac24142342b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[THE DEAN OFFICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="0" width="211" height="10" uuid="df0aa9ca-576b-4493-9774-8a702847bea8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REUBLIC OF CAMEROON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="111" width="211" height="10" uuid="faf11fd5-eef8-4b46-97eb-af28edb01a65"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="143" width="135" height="10" uuid="404ca46e-4579-4217-9cd8-00bbd91a5f2a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="10" width="211" height="10" uuid="17bb1388-d6e6-4c69-897c-6d8f679bc4d5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[******]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="50" width="211" height="10" uuid="b6b58e4b-753a-4e60-9750-b223631590d2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="70" width="212" height="10" uuid="d61bba68-4320-4e6c-9621-4b86efe11070"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*****]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="80" width="211" height="10" uuid="32344e70-0ca3-44f1-b0bb-a597bbe888c4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FACULTY OF LETTERS AND SOCIAL SCIENCES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="40" width="211" height="10" uuid="d287968d-c00e-4e18-a48a-b27cf29b2ebf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[MINISTRY OF HIGHER EDUCATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="20" width="212" height="10" uuid="9b8243e1-0ef5-46b3-aa67-e8521c78198d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Peace - Work - Fatherland]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="121" width="196" height="22" uuid="8fccf2e8-e8c0-41cd-a346-6862b42c2f82"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[The Deputy-Dean in charge of admission and students' records]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="60" width="212" height="10" uuid="0ffd82fc-606e-4a30-b224-5c7e4764ed34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[THE UNIVERSITY OF MAROUA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="210" height="10" uuid="3de8c2d8-e8bd-4d3b-a1c6-c1b1cfa3c3de"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[******]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="30" width="210" height="10" uuid="8c569144-c5e7-478c-85e9-f81549ea6eaa"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[******]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="144" width="137" height="11" uuid="a3c06cc2-7b4d-482e-9226-fd36dc3ecc61"/>
+				<textElement verticalAlignment="Middle" rotation="None">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fax: (+237)  .......................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="153" width="197" height="26" uuid="800a5a0f-3d23-40de-bf89-2033380a5de4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Head of Department of Education and Statistics]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="136" y="21" width="164" height="15" uuid="3401fc3f-814c-4a9b-84a2-ab8e1095f7af"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TAUX DE REUSSITE NIVEAU]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="300" y="21" width="16" height="15" uuid="11f4cc79-6360-4297-b83b-65d00f5d5edf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{niveau}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="382" y="21" width="100" height="15" uuid="f6faf273-5775-4b20-853b-8bd2d634db94"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{annee}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="21" width="66" height="15" uuid="d2dc21a0-1651-4d8a-bd83-158b9101afab"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ANNEE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="0" width="556" height="21" uuid="f63b4804-a97d-4875-9907-c76569e36408"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="556" height="21" uuid="3d92192d-20ef-4f46-9a61-56710b581355"/>
+				<textElement>
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="177" y="0" width="62" height="24" backcolor="#CCCCCC" uuid="f7ef6de2-dbc8-47e2-b1b3-7ce0e40440ea"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Specialite]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="114" y="0" width="63" height="24" backcolor="#CCCCCC" uuid="2c74cb2a-ba68-420a-ad51-16ef895eabd8"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Section]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="114" height="24" backcolor="#CCCCCC" uuid="889decaf-3739-4950-ac4b-855d54494d6d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="489" y="0" width="66" height="24" backcolor="#CCCCCC" uuid="6451c324-f318-417a-ba1f-07e5541e9c47"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pourcentage Reussite]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="322" y="0" width="82" height="24" backcolor="#CCCCCC" uuid="4f9617db-d483-490b-aa56-61eb138f5fc6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Etudiant Solvables]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="239" y="0" width="83" height="24" backcolor="#CCCCCC" uuid="73882768-7f4a-49fd-8c56-12991d6d3956"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Etudiant Composés]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="404" y="0" width="85" height="24" backcolor="#CCCCCC" uuid="e53ac812-c95a-4853-b3e0-98ec05d9546e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Etudiant Admis]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="114" height="15" uuid="fc0df227-cc21-4dbf-8c48-8232ee5c763a"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dep}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="114" y="0" width="63" height="15" uuid="4a01ee47-e08c-426c-88cd-d6c65d93f9e6"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{section}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="177" y="0" width="62" height="15" uuid="11cee063-ff79-4434-932c-61b9194ab61d"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{spec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="0" width="83" height="15" uuid="87697bd3-e1e0-41bb-a298-1729707ee750"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nbreEtCom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="322" y="0" width="82" height="15" uuid="49fffb00-24ce-411a-8ff9-c115351403cc"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nbreEtSol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="404" y="0" width="85" height="15" uuid="1bf16e83-88e1-49af-91d2-6b4315baed3c"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nbreEtAd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="489" y="0" width="66" height="15" uuid="7c3f8f47-a5c5-4cee-8e2b-05e90d9cbb59"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="7" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percentAd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="281" y="37" width="273" height="20" uuid="f51acc97-7e3b-40fe-9f8f-f38f8d2028b2"/>
+				<text><![CDATA[Fait à.......................................le ........................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="37" uuid="e5973d10-c679-43c3-a02d-0280fd8d4b0c"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

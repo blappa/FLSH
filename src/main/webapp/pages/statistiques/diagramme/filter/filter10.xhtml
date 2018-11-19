@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <h:form id="filter10">
+
+            <h:panelGroup id="display">
+                <h:panelGrid columns="6" cellpadding="5" > 
+                    <p:outputLabel value="Annee:" for="annee" />
+                    <p:selectOneMenu id="annee" value="#{statistiquesBean.anneeId}" style="width: 160px" required="true" >  
+                        <f:selectItem itemLabel="Choisir un annee" itemValue="" />  
+                        <f:selectItems  value="#{statistiquesBean.listAnnee}"
+                                        var="an"
+                                        itemLabel="#{an.annee}"
+                                        itemValue="#{an.id}"
+                                        />  
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Departement:" for="departement" />
+                    <p:selectOneMenu id="departement" value="#{statistiquesBean.departementId}" valueChangeListener="#{statistiquesBean.processDepartement}"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                        <f:selectItems  value="#{statistiquesBean.listDepartement}"
+                                        var="dep"
+                                        itemLabel="#{dep.nom}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="section,niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{statistiquesBean.sectionId}" valueChangeListener="#{statistiquesBean.processSection}"  style="width: 160px"  disabled="#{statistiquesBean.sectionDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{statistiquesBean.sections}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                        <p:ajax update="niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Niveau:" for="niveau" />
+                    <p:selectOneMenu id="niveau" value="#{statistiquesBean.level}" valueChangeListener="#{statistiquesBean.processNiveau}"    style="width: 160px"  disabled="#{statistiquesBean.niveauDisable}" >  
+                        <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                        <f:selectItems value="#{statistiquesBean.niveauxAll}" /> 
+                        <p:ajax update="specialite" event="change" />
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Specialite:" for="specialite" />
+                    <p:selectOneMenu id="specialite" value="#{statistiquesBean.specialiteId}"   style="width: 160px"   disabled="#{statistiquesBean.specialiteDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                        <f:selectItems value="#{statistiquesBean.specialites}" 
+                                       var="sp"
+                                       itemLabel="#{sp.nom}"
+                                       itemValue="#{sp.id}"
+                                       />  
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </h:panelGroup> 
+
+            <div style="margin-top: 2%;font-weight : bold;"> 
+                <p:commandButton  icon="ui-icon-script" actionListener="#{statistiquesBean.filter10}" value="Afficher" update=":growl,:parent:parent:tab:anneeBac" process="filter10"  /> 
+            </div>
+        </h:form>
+    </ui:composition>
+
+</html>

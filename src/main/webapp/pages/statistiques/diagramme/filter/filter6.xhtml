@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <h:form id="filter6">
+
+            <h:panelGroup id="display">
+                <h:panelGrid columns="2" cellpadding="5" > 
+                    <p:outputLabel value="Annee:" for="annee" />
+                    <p:selectOneMenu id="annee" value="#{statistiquesBean.anneeId}" style="width: 160px" required="true" >  
+                        <f:selectItem itemLabel="Choisir un annee" itemValue="" />  
+                        <f:selectItems  value="#{statistiquesBean.listAnnee}"
+                                        var="an"
+                                        itemLabel="#{an.annee}"
+                                        itemValue="#{an.id}"
+                                        />  
+                    </p:selectOneMenu>
+                   </h:panelGrid>
+            </h:panelGroup> 
+
+            <div style="margin-top: 2%;font-weight : bold;"> 
+                <p:commandButton  icon="ui-icon-script" actionListener="#{statistiquesBean.filter6}" value="Afficher" update=":growl,:parent:parent:tab:sem2" process="filter6"  /> 
+            </div>
+        </h:form>
+    </ui:composition>
+
+</html>

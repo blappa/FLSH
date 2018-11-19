@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartementViewDlg" widgetVar="DepartementViewDialog" modal="true" resizable="false" appendToBody="true" header="Modules >> View Departement ">
+
+            <h:form id="DepartementViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{departementBean.selected != null}">
+                        
+                        <h:outputText value="#{myBundle.ViewDepartementLabel_nom}"/>
+                        <h:outputText value="#{departementBean.selected.nom}" title="#{myBundle.ViewDepartementTitle_nom}"/>
+
+                        <h:outputText value="#{myBundle.ViewDepartementLabel_sigle}"/>
+                        <h:outputText value="#{departementBean.selected.sigle}" title="#{myBundle.ViewDepartementTitle_sigle}"/>
+
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="DepartementViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

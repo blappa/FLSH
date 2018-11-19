@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="UtilisateurCreateDlg" widgetVar="UtilisateurCreateDialog" modal="true" resizable="false" appendToBody="true" header="Modules >> Configuration >> Create Utilisateur">
+
+            <h:form id="UtilisateurCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="Nom et Prénom" for="nom" />
+                        <p:inputText id="nom" value="#{utilisateurBean.selected.name}" required="true" requiredMessage="Le nom du utilisateur est obligatoire"/>
+
+                        <p:outputLabel value="UserName" for="username" />
+                        <p:inputText id="username" value="#{utilisateurBean.selected.username}"  required="true" requiredMessage="Le username utilisateur est obligatoire"/>
+
+                        <p:outputLabel value="Mot de passe" for="password" />
+                        <p:password id="password" value="#{utilisateurBean.selected.password}" required="true" requiredMessage="Le password du utilisateur est obligatoire"/>
+
+                        <p:outputLabel value=" Vérif. mot de passe" for="password1" />
+                        <p:password id="password1" value="#{utilisateurBean.password}" />
+
+
+                        <p:outputLabel value="Niveau d'acces" for="authority" />
+                        <p:selectOneMenu id="authority" value="#{utilisateurBean.idAutority}" required="true" style="width: 190px;">
+                            <f:selectItem itemLabel="Choisir" itemValue=""/>
+                            <f:selectItems value="#{utilisateurBean.roles}"  />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Departement" for="dep" />
+                        <p:selectOneMenu id="dep" value="#{utilisateurBean.departementId}" style="width: 190px;" >
+                            <f:selectItem itemLabel="Tous les departements" itemValue=""/>
+                            <f:selectItems value="#{utilisateurBean.departements}"
+                                           var="departementItem"
+                                           itemValue="#{departementItem.id}"
+                                           itemLabel="#{departementItem.nom}"
+                                           />
+                        </p:selectOneMenu>                         
+                        <p:outputLabel for="anabled"  value="Etat"  />
+                        <p:selectOneMenu id="anabled" value="#{utilisateurBean.etat}" style="width: 190px;" required="true"  >
+                            <f:selectItem itemLabel="Choisir" itemValue=""/>
+                            <f:selectItem itemLabel="Activé" itemValue="1"/>
+                            <f:selectItem itemLabel="Désactivé" itemValue="0"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{utilisateurBean.saveNew}" value="#{myBundle.Save}" update="display,:parent:UtilisateurListForm:datalist,:growl" oncomplete="UtilisateurCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="UtilisateurCreateDialog.hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

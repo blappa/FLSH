@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EtudiantViewDlg" widgetVar="EtudiantViewDialog" modal="true" resizable="false" appendToBody="true" header="Gestion d'un Etudiant >> View Etudiant">
+
+            <h:form id="EtudiantViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{etudiantBean.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewEtudiantLabel_matricule}"/>
+                        <h:outputText value="#{etudiantBean.selected.matricule}" title="#{myBundle.ViewEtudiantTitle_matricule}"/>
+                        
+                        <h:outputText value="#{myBundle.ViewEtudiantLabel_nom}"/>
+                        <h:outputText value="#{etudiantBean.selected.nom}" title="#{myBundle.ViewEtudiantTitle_nom}"/>
+                        
+                        <h:outputText value="Diplome Entree"/>
+                        <h:outputText value="#{etudiantBean.selected.diplomEntree}" title="diplomEntree"/>
+
+                        <h:outputText value="date Nais."  />
+                        <h:outputText value="#{etudiantBean.selected.dateNais}" title="dateNais" />
+
+                        <h:outputText value="Lieu Nais." />
+                        <h:outputText value="#{etudiantBean.selected.lieuNais}" title="lieu Naissance" />
+
+                 
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="EtudiantViewDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="MatiereListForm">
+
+        <p:panel header="Module >> Liste Matiere">
+
+            <p:dataTable id="datalist" value="#{matiereBean.items}" var="item"
+                         selectionMode="single" selection="#{matiereBean.selected}"
+                         rowKey="#{item.id}"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="460"
+                         rowIndexVar="index"
+                         >
+                <p:column width="25">
+                    <f:facet name="header">
+                        <h:outputText value="No"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{item.module.code}" filterBy="#{item.module.code}" width="65">
+                    <f:facet name="header">
+                        <h:outputText value="Code"/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.code}"/>
+                </p:column>
+                <p:column sortBy="#{item.intitule}" filterBy="#{item.intitule}" width="300">
+                    <f:facet name="header">
+                        <h:outputText value="Intitule"/>
+                    </f:facet>
+                    <h:outputText value="#{item.intitule}"/>
+                </p:column>
+
+                <p:column sortBy="#{item.module.targetCode}" filterBy="#{item.module.targetCode}" width="375">
+                    <f:facet name="header">
+                        <h:outputText value="UE"/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.targetCode}"/>
+                </p:column>
+                <p:column sortBy="#{item.module.semestre.level}" filterBy="#{item.module.semestre.level}" width="25">
+                    <f:facet name="header">
+                        <h:outputText value="Semestre"/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.semestre.level}"/>
+                </p:column>
+                <p:column sortBy="#{item.module.anneeAcademique.annee}" filterBy="#{item.module.anneeAcademique.annee}" width="75">
+                    <f:facet name="header">
+                        <h:outputText value="Annee Ac."/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.anneeAcademique.annee}"/>
+                </p:column>
+                <p:column sortBy="#{item.module.specialite.nom}" filterBy="#{item.module.specialite.nom}" width="100">
+                    <f:facet name="header">
+                        <h:outputText value="Specialite"/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.specialite.nom}"/>
+                </p:column>
+                <p:column sortBy="#{item.module.specialite.niveau.level}" filterBy="#{item.module.specialite.niveau.level}" width="25">
+                    <f:facet name="header">
+                        <h:outputText value="Niveau"/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.specialite.niveau.level}"/>
+                </p:column>
+                <p:column sortBy="#{item.module.specialite.niveau.section.nom}" filterBy="#{item.module.specialite.niveau.section.nom}" width="100">
+                    <f:facet name="header">
+                        <h:outputText value="Section"/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.specialite.niveau.section.nom}"/>
+                </p:column>
+                <p:column sortBy="#{item.module.specialite.niveau.section.departement.nom}" filterBy="#{item.module.specialite.niveau.section.departement.nom}" width="150">
+                    <f:facet name="header">
+                        <h:outputText value="Dep."/>
+                    </f:facet>
+                    <h:outputText value="#{item.module.specialite.niveau.section.departement.nom}"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{matiereBean.prepare}"  oncomplete="MatiereCreateDialog.show()"/>
+                    <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{myBundle.View}" update=":parent:MatiereViewForm" oncomplete="MatiereViewDialog.show()" disabled="#{empty matiereBean.selected}"/>
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":parent:MatiereEditForm:display"  oncomplete="MatiereEditDialog.show()" disabled="#{empty matiereBean.selected}"/>
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{myBundle.Delete}" update=":parent:MatiereListForm:confirm" oncomplete="cd.show();"  disabled="#{empty matiereBean.selected}"/>
+                </f:facet>
+
+            </p:dataTable>
+
+        </p:panel>
+
+        <p:dialog id="confirm" header="Etez-vous sur de bien vouloir supprimer cette élèment ?" modal="true" resizable="true" appendToBody="true" widgetVar="cd">
+            <h:panelGroup id="display">
+                <p:panelGrid  columns="1" rendered="#{matiereBean.selected != null}">
+                    <h:outputText value="Matiere : #{matiereBean.selected.intitule}"/>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{matiereBean.selected.id}" />
+                    </p:panel>
+                </p:panelGrid>
+                <p:commandButton  value="Oui"  actionListener="#{matiereBean.delete}" update=":growl,display" oncomplete="cd.hide()" process = "display" />
+                <p:commandButton value="Non" onclick="cd.hide();" type="button" />
+            </h:panelGroup>
+        </p:dialog>
+    </h:form>
+
+</ui:composition>

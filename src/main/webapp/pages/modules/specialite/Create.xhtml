@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SpecialiteCreateDlg" widgetVar="SpecialiteCreateDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Créer Specialite">
+
+            <h:form id="SpecialiteCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+
+                        <p:outputLabel value="Type de Specialité" for="type" />
+                        <p:inputText id="type" value="#{specialiteBean.selected.professional}"  />
+                        
+                         <p:outputLabel value="Ordre" for="ordre" />
+                         <p:inputText id="ordre" value="#{specialiteBean.selected.type}"  />
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{specialiteBean.selected.nom}" title="#{myBundle.CreateSpecialiteTitle_nom}" style="width: 600px"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSpecialiteLabel_niveauId}" for="niveauId" />
+                        <p:selectOneMenu id="niveauId" value="#{specialiteBean.niveauId}" required="true" requiredMessage="#{myBundle.EditSpecialiteRequiredMessage_niveauId}" style="width: 100%">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{specialiteBean.listNiv}"
+                                           var="niveauIdItem"
+                                           itemValue="#{niveauIdItem.id}"
+                                           itemLabel="niveau #{niveauIdItem.level} #{niveauIdItem.section.nom}"
+                                           />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{specialiteBean.saveNew}" value="#{myBundle.Save}" update="display,:parent:SpecialiteListForm:datalist,:growl" oncomplete="SpecialiteCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SpecialiteCreateDialog.hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

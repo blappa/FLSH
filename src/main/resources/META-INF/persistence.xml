@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="FLSHTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <non-jta-data-source/>
+    <class>com.univ.maroua.flsh.entities.AnneeAcademique</class>
+    <class>com.univ.maroua.flsh.entities.Autorisation</class>
+    <class>com.univ.maroua.flsh.entities.Departement</class>
+    <class>com.univ.maroua.flsh.entities.Etudiant</class>
+    <class>com.univ.maroua.flsh.entities.EtudiantSection</class>
+    <class>com.univ.maroua.flsh.entities.Inscription</class>
+    <class>com.univ.maroua.flsh.entities.Licence</class>
+    <class>com.univ.maroua.flsh.entities.Matiere</class>
+    <class>com.univ.maroua.flsh.entities.MatiereOptionnelle</class>
+    <class>com.univ.maroua.flsh.entities.Module</class>
+    <class>com.univ.maroua.flsh.entities.Niveau</class>
+    <class>com.univ.maroua.flsh.entities.Note</class>
+    <class>com.univ.maroua.flsh.entities.Section</class>
+    <class>com.univ.maroua.flsh.entities.Semestre</class>
+    <class>com.univ.maroua.flsh.entities.Sms</class>
+    <class>com.univ.maroua.flsh.entities.Specialite</class>
+    <class>com.univ.maroua.flsh.entities.SpecialiteAnnee</class>
+    <class>com.univ.maroua.flsh.entities.SpecialiteEtudiant</class>
+    <class>com.univ.maroua.flsh.entities.Statistique</class>
+    <class>com.univ.maroua.flsh.entities.Utilisateur</class>
+    <properties>
+      <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.EJB3NamingStrategy"/>
+    </properties>
+  </persistence-unit>
+</persistence>

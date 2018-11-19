@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SpecialiteEditDlg" widgetVar="SpecialiteEditDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Editer Specialite">
+
+            <h:form id="SpecialiteEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{specialiteBean.selected != null}">
+
+                        <p:outputLabel value="Type de Specialité" for="type" />
+                        <p:inputText id="type" value="#{specialiteBean.selected.professional}"  />
+                        
+                          <p:outputLabel value="Ordre" for="ordre" />
+                        <p:inputText id="ordre" value="#{specialiteBean.selected.type}"  />
+
+                        <p:outputLabel value="#{myBundle.EditSpecialiteLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{specialiteBean.selected.nom}" title="#{myBundle.EditSpecialiteTitle_nom}" style="width: 600px" />
+
+                      
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{specialiteBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{specialiteBean.update}" value="#{myBundle.Save}" update="display,:parent:SpecialiteListForm:datalist,:growl" oncomplete="SpecialiteEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SpecialiteEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

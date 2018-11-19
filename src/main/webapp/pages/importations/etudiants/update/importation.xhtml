@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="form" >
+            <p:panel header="mise a jour des donnes  des etudiants" style="padding-bottom: 28%;">  
+                <p:panel  id="upload"> 
+
+                    <h:panelGrid columns="8" cellpadding="5"  >  
+                        <p:growl id="growl" showDetail="true" sticky="true" />  
+                        <p:fileUpload id="file"  fileUploadListener="#{importationEtudiantBean.handleFileUploadUpdate}"                         
+                                      mode="advanced"  
+                                      showButtons="false"
+                                      update="form:growl"
+                                      sizeLimit="10000000" 
+                                      label="Choisir le fichier excel"
+                                      allowTypes="/(\.|\/)(xls)$/" /> 
+
+                    </h:panelGrid>
+                </p:panel> 
+                 <p:panel> 
+                     <p:commandButton id="sol" value="Generer la fiche exemple"   actionListener="#{importationEtudiantBean.xlsUpdateEtudiant}"  ajax="false" />
+                </p:panel> 
+            </p:panel> 
+        </h:form> 
+
+    </ui:composition>
+</html>

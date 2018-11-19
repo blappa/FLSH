@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition>
+       
+        <h:form id="form" >
+
+            <p:dataTable var="etudiant" value="#{attestationBean.attestations}"
+                         scrollRows="1500" 
+                         scrollable="true" liveScroll="true" scrollHeight="537"
+                         rowIndexVar="index"
+                         id="dataTable"
+                         >
+
+                <p:column >
+                    <f:facet name="header">
+                        <h:outputText value="No"/>
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column sortBy="#{etudiant.nomPrenom}" filterBy="#{etudiant.nomPrenom}">
+                    <f:facet name="header">
+                        <h:outputText value="Noms et prenoms"/>
+                    </f:facet>
+                    <h:outputText value="#{etudiant.nomPrenom}"/>
+                </p:column>
+                <p:column sortBy="#{etudiant.matricule}" filterBy="#{etudiant.matricule}">
+                    <f:facet name="header">
+                        <h:outputText value="matricule"/>
+                    </f:facet>
+                    <h:outputText value="#{etudiant.matricule}"/>
+                </p:column>
+                <p:column sortBy="#{etudiant.dateNais}" filterBy="#{etudiant.dateNais}">
+                    <f:facet name="header">
+                        <h:outputText value="date nais."/>
+                    </f:facet>
+                    <h:outputText value="#{etudiant.dateNais}"/>
+                </p:column>
+                <p:column sortBy="#{etudiant.lieuNais}" filterBy="#{etudiant.lieuNais}">
+                    <f:facet name="header">
+                        <h:outputText value="lieu nais."/>
+                    </f:facet>
+                    <h:outputText value="#{etudiant.lieuNais}"/>
+                </p:column>
+                <p:column sortBy="#{etudiant.diplomeEntree}" filterBy="#{etudiant.diplomeEntree}">
+                    <f:facet name="header">
+                        <h:outputText value="diplome ent."/>
+                    </f:facet>
+                    <h:outputText value="#{etudiant.diplomeEntree}"/>
+                </p:column>
+                <p:column sortBy="#{etudiant.mgp}" filterBy="#{etudiant.mgp}">
+                    <f:facet name="header">
+                        <h:outputText value="MGP"/>
+                    </f:facet>
+                    <h:outputText value="#{etudiant.mgp}"/>
+                </p:column>
+                <p:column sortBy="#{etudiant.mention}" filterBy="#{etudiant.mention}">
+                    <f:facet name="header">
+                        <h:outputText value="mention"/>
+                    </f:facet>
+                    <h:outputText value="#{etudiant.mention}"/>
+                </p:column>
+
+            </p:dataTable>
+
+
+
+        </h:form> 
+
+
+
+
+    </ui:composition>
+</html>

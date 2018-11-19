@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="SectionEditDlg" widgetVar="SectionEditDialog" modal="true" resizable="false" appendToBody="true" header="Module >> Editer Une Section">
+
+            <h:form id="SectionEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{sectionBean.selected != null}">
+
+                        <p:outputLabel value="Nom" for="nom" />
+                        <p:inputText id="nom" value="#{sectionBean.selected.nom}" title="nom section" required="true" requiredMessage="Le nom du section est obligatoire" style="width: 600px"/>
+
+                        <p:outputLabel value="Sigle" for="code" />
+                        <p:inputText id="code" value="#{sectionBean.selected.sigle}" title="sigle section" required="true" requiredMessage="Le sigle du section est obligatoire"/>
+
+                     
+
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{sectionBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{sectionBean.update}" value="#{myBundle.Save}" update="display,:parent:SectionListForm:datalist,:growl" oncomplete="SectionEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SectionEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <ui:composition>
+        <h:form>
+            <p:menubar >  
+                <p:submenu icon="ui-icon-person" label="Etudiants | " style="margin-left: 10px;">
+                    <p:menuitem value="preinscrits" url="/a12" /> 
+                    <p:separator />
+                    <p:menuitem value="Cartes d'etudiants" url="/a13" />
+                     <p:separator />
+                    <p:menuitem value="Quitus" url="/a15" /> 
+                     <p:separator />
+                    <p:menuitem value="inscrits" url="/pages/exportations/etudiants/inscrit/index.xhtml" />  
+                     <p:separator />
+                    <p:menuitem value="inscrits avec tpe td cc" url="/pages/exportations/etudiants/inscritCc/index.xhtml" /> 
+                     <p:separator />
+                    <p:menuitem value="inscrits pour anonymat" url="/pages/exportations/etudiants/inscritEx/index.xhtml" /> 
+                     <p:separator />
+                    <p:menuitem value="émargement pour examen" url="/pages/exportations/etudiants/emargement/index.xhtml" />                 
+                </p:submenu>
+                <p:menuitem icon="ui-icon-check" value="solvables | " url="/pages/exportations/etudiants/solvables/index.xhtml" style="margin-left: 10px;"/>
+                <p:submenu icon="ui-icon-note" label="#{myBundle.releve}" style="margin-left: 10px;">
+                    <p:menuitem value="#{myBundle.global}" url="/a18" />
+                    <p:separator />
+                    <p:menuitem value="#{myBundle.individuel}" url="/a19" />
+                </p:submenu>
+                <p:submenu icon="ui-icon-suitcase | " label="#{myBundle.attestation}" style="margin-left: 10px;">
+                    <p:menuitem value="#{myBundle.global}" url="/a20" />
+                    <p:separator />
+                    <p:menuitem value="#{myBundle.individuel}" url="/a21" />
+                </p:submenu>
+                <p:submenu icon="ui-icon-document-b" label="notes d'une specialité |" style="margin-left: 10px;">
+                    <p:menuitem value="format excel" url="/a222" />
+                </p:submenu>
+                <p:submenu icon="ui-icon-bookmark" label="Certificat de scolatite" style="margin-left: 10px;">
+                    <p:menuitem value="#{myBundle.global}" url="/pages/exportations/certificat/global/index.xhtml" />
+                     <p:separator />
+                    <p:menuitem value="#{myBundle.individuel}" url="/pages/exportations/certificat/personnel/index.xhtml" />
+                </p:submenu>          
+            </p:menubar>
+        </h:form> 
+    </ui:composition>
+
+</html>

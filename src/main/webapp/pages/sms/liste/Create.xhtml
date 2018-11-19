@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <p:dialog id="EtudiantCreateDlg" widgetVar="SmsCreateDialog" modal="true" resizable="false" appendToBody="true" header="souscription d'un étudiant pour les sms">
+
+            <h:form id="EtudiantCreateForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" >
+
+                        <p:outputLabel value="Matricule" for="matricule" />
+                        <p:inputText id="matricule" value="#{smsBean.etudiant.matricule}" title="matricule de l'etudiant" />
+
+                        <p:outputLabel value="Section" for="sect" />
+                        <p:selectOneMenu id="sect" value="#{smsBean.sectionId}" required='true'   style="width: 160px"  >  
+                            <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                            <f:selectItems  value="#{smsBean.listSection}"
+                                            var="dep"
+                                            itemLabel="#{dep.nom}"
+                                            itemValue="#{dep.id}"
+                                            />  
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Numéro Orange" for="orange" />
+                        <p:inputText id="orange" value="#{smsBean.etudiant.orange}" title="numero orange" />
+
+                        <p:outputLabel value="Numéro Mtn" for="mtn" />
+                        <p:inputText id="mtn" value="#{smsBean.etudiant.mtn}" title="numero mtn" />
+
+                        <p:outputLabel value="Numéro Nexttel" for="nexttel" />
+                        <p:inputText id="nexttel" value="#{smsBean.etudiant.nextel}" title="numero nexttel" />
+
+                         <p:outputLabel value="Numéro Internationnal" for="inter" />
+                         <p:inputText id="inter" value="#{smsBean.etudiant.internationnal}" title="numero internationnal" />
+
+                        
+                        <p:outputLabel value="Semestre:" for="type" />
+                        <p:selectOneMenu id="type" value="#{smsBean.typeSemestre}" required="=true"  style="width: 160px"  >  
+                            <f:selectItem itemLabel="choisir l'operation" itemValue="" />
+                            <f:selectItem itemLabel="notes du semestre 1" itemValue="1" />
+                            <f:selectItem itemLabel="notes du semestre 2" itemValue="2" />
+                            <f:selectItem itemLabel="notes  des deux semestres" itemValue="3" />
+                        </p:selectOneMenu> 
+
+                        <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                        <p:selectOneMenu id="anneeAcademiqueid" value="#{smsBean.anneeAcademiqueid}" required="true" style="width: 160px"  >
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{smsBean.listAnneeAcademique}"
+                                           var="anneeAcademiqueidItem"
+                                           itemValue="#{anneeAcademiqueidItem.id}"
+                                           itemLabel="#{anneeAcademiqueidItem.annee}"
+                                           />
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{smsBean.saveNew}" value="#{myBundle.Save}" update="display,:parent:SmsListForm:datalist,:growl" oncomplete="SmsCreateDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="SmsCreateDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+        <div style="font: normal 130% ;color: white; background-color: #0184ff;"><h5>>>>> Gestion des notes >> Syntheses annuelle</h5></div>
+        <h:panelGroup id="andisplay">
+            <h:panelGrid columns="6" cellpadding="5" > 
+                <p:outputLabel value="Departement:" for="departement" />
+                <p:selectOneMenu id="departement" value="#{print.departementId}" valueChangeListener="#{print.processDepartement}"  style="width: 160px"  >  
+                    <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                    <f:selectItems  value="#{print.listDepartement}"
+                                    var="dep"
+                                    itemLabel="#{dep.nom}"
+                                    itemValue="#{dep.id}"
+                                    />  
+                    <p:ajax update="section,niveau,specialite,anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>  
+
+                <p:outputLabel value="Section" for="section" />
+                <p:selectOneMenu id="section" value="#{print.sectionId}" valueChangeListener="#{print.processSection}"  required="true" style="width: 160px"  disabled="#{print.sectionDisable}"   >  
+                    <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                    <f:selectItems  value="#{print.listSection}"
+                                    var="sec"
+                                    itemLabel="#{sec.nom}"
+                                    itemValue="#{sec.id}"
+                                    />  
+                    <p:ajax update="niveau,specialite,anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>  
+
+                <p:outputLabel value="Niveau:" for="niveau" />
+                <p:selectOneMenu id="niveau" value="#{print.niveauId}" valueChangeListener="#{print.processNiveau1}"   required="true" style="width: 160px"  disabled="#{print.niveauDisable}" >  
+                    <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                    <f:selectItems value="#{print.niveaux}" />   
+                    <p:ajax update="specialite,anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Specialite:" for="specialite" />
+                <p:selectOneMenu id="specialite" value="#{print.specialiteId}" valueChangeListener="#{print.processSpecialite1}" required="true"  style="width: 160px"   disabled="#{print.specialiteDisable}"   >  
+                    <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                    <f:selectItems value="#{print.listSpecialite1}" 
+                                   var="sp"
+                                   itemLabel="#{sp.nom}"
+                                   itemValue="#{sp.id}"
+                                   />  
+                    <p:ajax update="anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                <p:selectOneMenu id="anneeAcademiqueid" value="#{print.anneeAcademiqueid}" required="true" style="width: 160px" >
+                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                    <f:selectItems value="#{print.listAnneeAcademique}"
+                                   var="anneeAcademiqueidItem"
+                                   itemValue="#{anneeAcademiqueidItem.id}"
+                                   itemLabel="#{anneeAcademiqueidItem.annee}"
+                                   />
+                </p:selectOneMenu>
+               <p:spacer width="50" />
+                <p:commandButton icon="ui-icon-calculator"  value="changer la moyenne" actionListener="#{print.activePandeliberation}" ajax="false" />
+                <p:panel  visible="#{print.statusPannoDeliberation}"  style="margin: 0 0 0 0;padding: 0 0 0 0;border: none;font-weight : bold;">
+                    <h:panelGroup id="display1">
+                        <p:inputText id="moy" value="#{print.moyenne}" />
+                        <p:commandButton actionListener="#{print.doMoyenne}" value="Valider" update=":parent:andisplay,:growl" ajax="false"    style="margin-top: 1%"/>
+                    </h:panelGroup>
+                </p:panel> 
+          </h:panelGrid>
+           <p:spacer width="50" />
+            <p:commandButton  value="Generer le PDF"  actionListener="#{print.annuelPDF()}"  style="text-decoration : blue;" ajax="false"   /> 
+        </h:panelGroup>
+    </ui:composition>
+
+</html>

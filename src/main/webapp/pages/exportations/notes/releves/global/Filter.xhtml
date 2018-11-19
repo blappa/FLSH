@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition>
+
+        <h:form id="semestreForm" >
+            <h:panelGroup id="display" >
+                <h:panelGrid columns="8" cellpadding="5" >
+
+                    <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                    <p:selectOneMenu id="anneeAcademiqueid" value="#{releveBean.anneeAcademiqueid}" required="true" >
+                        <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{releveBean.listAnneeAcademique}"
+                                       var="anneeAcademiqueidItem"
+                                       itemValue="#{anneeAcademiqueidItem.id}"
+                                       itemLabel="#{anneeAcademiqueidItem.annee}"
+                                       />
+                        <p:ajax update="departement"  />
+
+                    </p:selectOneMenu>
+
+
+                    <p:outputLabel value="Departement:" for="departement" />
+                    <p:selectOneMenu id="departement" value="#{releveBean.departementId}" valueChangeListener="#{releveBean.processDepartement}"  style="width: 160px"  >  
+                        <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                        <f:selectItems  value="#{releveBean.listDepartement}"
+                                        var="dep"
+                                        itemLabel="#{dep.nom}"
+                                        itemValue="#{dep.id}"
+                                        />  
+                        <p:ajax update="section,niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel value="Section" for="section" />
+                    <p:selectOneMenu id="section" value="#{releveBean.sectionId}" valueChangeListener="#{releveBean.processSection}"  required="true" style="width: 160px"  disabled="#{releveBean.sectionDisable}"   >  
+                        <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                        <f:selectItems  value="#{releveBean.listSection}"
+                                        var="sec"
+                                        itemLabel="#{sec.nom}"
+                                        itemValue="#{sec.id}"
+                                        />  
+                        <p:ajax update="niveau,specialite" event="change" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel for="niveau"  value="Niveau"/>
+                    <p:selectOneMenu id="niveau" value="#{releveBean.niveauId}" valueChangeListener="#{releveBean.processNiveau}"    style="width: 160px"  disabled="#{releveBean.niveauDisable}">
+                        <f:selectItem itemLabel="Choisir un niveau" itemValue=""/>
+                         <f:selectItems value="#{releveBean.niveaux}" /> 
+                        <p:ajax update="specialite" event="change" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Specialite:" for="specialite" />
+                    <p:selectOneMenu id="specialite" value="#{releveBean.specialiteId}"   style="width: 160px"  disabled="#{releveBean.specialiteDisable}"     >  
+                        <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                        <f:selectItems value="#{releveBean.listSpecialite}" 
+                                       var="sp"
+                                       itemLabel="#{sp.nom}"
+                                       itemValue="#{sp.id}"
+                                       />  
+                    </p:selectOneMenu>
+
+
+                </h:panelGrid>
+
+            </h:panelGroup>
+        <p:panel  >
+            <p:commandButton  value="Exporter"  actionListener="#{releveBean.PDF(1)}"  style="text-decoration : blue;" ajax="false"  />
+                    </p:panel>
+         </h:form>
+
+    </ui:composition>
+
+</html>

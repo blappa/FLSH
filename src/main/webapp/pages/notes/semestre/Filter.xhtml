@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+
+    <ui:composition>
+        <div style="font: normal 130% ;color: white; background-color: #0184ff;"><h5>>>>> Gestion des notes >> Syntheses semestrielle</h5></div>
+        <h:panelGroup id="display"  >
+            <h:panelGrid id="displayGrid" columns="6" cellpadding="5" > 
+                <p:outputLabel value="Departement:" for="departement" />
+                <p:selectOneMenu id="departement" value="#{print.departementId}" valueChangeListener="#{print.processDepartement}"  style="width: 160px"  >  
+                    <f:selectItem itemLabel="Choisir un departement" itemValue="" />  
+                    <f:selectItems  value="#{print.listDepartement}"
+                                    var="dep"
+                                    itemLabel="#{dep.nom}"
+                                    itemValue="#{dep.id}"
+                                    />  
+                    <p:ajax update="section,niveau,specialite,anneeAcademiqueid,semestre" event="change" />
+                </p:selectOneMenu>  
+
+                <p:outputLabel value="Section" for="section" />
+                <p:selectOneMenu id="section" value="#{print.sectionId}" valueChangeListener="#{print.processSection}"  required="true" style="width: 160px"  disabled="#{print.sectionDisable}"   >  
+                    <f:selectItem itemLabel="Choisir une section" itemValue="" />  
+                    <f:selectItems  value="#{print.listSection}"
+                                    var="sec"
+                                    itemLabel="#{sec.nom}"
+                                    itemValue="#{sec.id}"
+                                    />  
+                    <p:ajax update="niveau,specialite,anneeAcademiqueid,semestre" event="change" />
+                </p:selectOneMenu>  
+
+                <p:outputLabel value="Niveau:" for="niveau" />
+                <p:selectOneMenu id="niveau" value="#{print.niveauId}" valueChangeListener="#{print.processNiveau}"   required="true" style="width: 160px"  disabled="#{print.niveauDisable}" >  
+                    <f:selectItem itemLabel="Choisir un niveau" itemValue="" />  
+                    <f:selectItems value="#{print.niveaux}" />   
+                    <p:ajax update="specialite,anneeAcademiqueid,semestre,type" event="change" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Specialite:" for="specialite" />
+                <p:selectOneMenu id="specialite" value="#{print.specialiteId}" valueChangeListener="#{print.processSpecialite}" required="true"  style="width: 160px"   disabled="#{print.specialiteDisable}"   >  
+                    <f:selectItem itemLabel="Choisir une specialite" itemValue="" />  
+                    <f:selectItems value="#{print.listSpecialite}" 
+                                   var="sp"
+                                   itemLabel="#{sp.nom}"
+                                   itemValue="#{sp.id}"
+                                   />  
+                    <p:ajax update="anneeAcademiqueid, semestre" event="change" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Semestre:" for="semestre" />
+                <p:selectOneMenu id="semestre" value="#{print.semestreid}" valueChangeListener="#{print.processSemestre}" required="true"  style="width: 160px"   disabled="#{print.semestreDisable}"   >  
+                    <f:selectItem itemLabel="Choisir un semestre" itemValue="" />  
+                    <f:selectItems value="#{print.listSemestre}" 
+                                   var="se"
+                                   itemLabel="semestre #{se.level}"
+                                   itemValue="#{se.id}"
+                                   />  
+                    <p:ajax update="anneeAcademiqueid" event="change" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Année Academique" for="anneeAcademiqueid" />
+                <p:selectOneMenu id="anneeAcademiqueid" value="#{print.anneeAcademiqueid}" required="true" style="width: 160px"  >
+                    <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                    <f:selectItems value="#{print.listAnneeAcademique}"
+                                   var="anneeAcademiqueidItem"
+                                   itemValue="#{anneeAcademiqueidItem.id}"
+                                   itemLabel="#{anneeAcademiqueidItem.annee}"
+                                   />
+                    <p:ajax update="type" event="change" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Type de synthese" for="type" />
+                <p:selectOneMenu id="type" value="#{print.typeSynthese}" required="true" style="width: 160px"  >
+                    <f:selectItem itemLabel="Choisir" itemValue="" />  
+                    <f:selectItems value="#{print.types}" /> 
+                </p:selectOneMenu>
+
+
+            </h:panelGrid>
+            <p:spacer width="50" />
+            <p:commandButton  value="Déverouillage des mises à jour"    style="text-decoration : blue;"  onclick="unlock.show();" />  
+
+
+            <p:spacer width="50" />
+            <p:commandButton  value="Generer le PDF"  actionListener="#{print.semPDF()}" ajax="false"  style="text-decoration : blue;"/>  
+
+
+        </h:panelGroup>
+
+        <p:dialog id="confirm2" header="Etez-vous sur de vouloir appliquer ce deverouillage? " widgetVar="unlock" modal="true" resizable="true" appendToBody="true" >
+            <p:commandButton process = "@this"  value="Oui" actionListener="#{print.doRecalcul}"   update=":growl" oncomplete="unlock.hide()"  />
+            <p:spacer width="50" />
+            <p:commandButton value="Non" onclick="unlock.hide();" type="button" />
+        </p:dialog>
+
+
+
+        <script type="text/javascript">
+                function showStatus() {
+                    blkUi.show();
+                }
+
+                function hideStatus() {
+                    blkUi.hide();
+                }
+        </script>
+    </ui:composition>
+</html>
+

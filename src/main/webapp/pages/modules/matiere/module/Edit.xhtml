@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModuleEditDlg" widgetVar="ModuleEditDialog" modal="true" resizable="false" appendToBody="true" header="Modules  >> Editer Un UE">
+
+            <h:form id="ModuleEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{moduleBean.selected != null}">
+
+                        <p:outputLabel value="code de l'ue" for="code1" />
+                        <p:inputText id="code1" value="#{moduleBean.selected.targetCode}" title="code" />
+
+                        <p:outputLabel value="position de l'ue" for="pos1" />
+                        <p:inputText id="pos1" value="#{moduleBean.selected.code}" title="position" />
+
+                        <p:outputLabel value="Credit" for="credit" />
+                        <p:inputText id="credit" value="#{moduleBean.selected.credit}" title="credit" />
+
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{moduleBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{moduleBean.update}" value="#{myBundle.Save}" update="display,:growl" oncomplete="ModuleEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="ModuleEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

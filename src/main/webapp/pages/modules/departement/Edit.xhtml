@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepartementEditDlg" widgetVar="DepartementEditDialog" modal="true" resizable="false" appendToBody="true" header="Modules >> Editer Departement">
+
+            <h:form id="DepartementEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" rendered="#{departementBean.selected != null}">
+
+                        <p:outputLabel value="#{myBundle.EditDepartementLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{departementBean.selected.nom}" title="#{myBundle.EditDepartementTitle_nom}" style="width: 600px" />
+
+                        <p:outputLabel value="#{myBundle.EditDepartementLabel_sigle}" for="sigle" />
+                        <p:inputText id="sigle" value="#{departementBean.selected.sigle}" title="#{myBundle.EditDepartementTitle_sigle}" />
+                    </p:panelGrid>
+                    <p:panel visible="false">
+                        <p:inputText id="id" value="#{departementBean.selected.id}" />
+                    </p:panel>
+                    <p:commandButton actionListener="#{departementBean.update}" value="#{myBundle.Save}" update="display,:parent:DepartementListForm:datalist,:growl" oncomplete="DepartementEditDialog.hide()" process = "display"/>
+                    <p:commandButton value="#{myBundle.Cancel}" onclick="DepartementEditDialog.hide();"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
